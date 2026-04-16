@@ -1334,7 +1334,7 @@ footer {
       <div class="flow-line reveal"></div>
       <div class="flow-item reveal delay-1"><div class="flow-num">2</div><div class="flow-text"><h3>利用登録</h3><p>公式HPからお申し込み</p></div></div>
       <div class="flow-line reveal"></div>
-      <div class="flow-item reveal delay-2"><div class="flow-num">3</div><div class="flow-text"><h3>アプリ導入</h3><p>SecondLife版またはFukuokaVsapo版をDL＆インストール</p></div></div>
+      <div class="flow-item reveal delay-2"><div class="flow-num">3</div><div class="flow-text"><h3>アプリ導入</h3><p>SecondLife版またはFukuokaVsapo版をダウンロード</p></div></div>
       <div class="flow-line reveal"></div>
       <div class="flow-item reveal delay-3"><div class="flow-num goal">4</div><div class="flow-text"><h3>Vさぽルームへようこそ！</h3><p>居場所は予約不要。プログラムは公式HPからお申込み</p></div></div>
     </div>
@@ -1446,39 +1446,42 @@ footer {
       /* ===== FULL-PAGE IMMERSIVE OPERATION ===== */
       .sl-ops { width:100vw; height:100vh; position:relative; display:flex; flex-direction:column; overflow:hidden; box-sizing:border-box; }
 
-      /* -- landscape: side-scroll walking world -- */
+      /* -- landscape: CSS perspective walking world -- */
       .sl-world { flex:1; position:relative; overflow:hidden; min-height:50vh; width:100%;
-        background:linear-gradient(180deg, #87CEEB 0%, #B0E0E6 40%, #98D8C8 58%, #7CB342 62%, #558B2F 100%); }
-      .sl-clouds { position:absolute; top:0; left:0; width:100%; height:35%; pointer-events:none; }
+        background:linear-gradient(180deg, #87CEEB 0%, #B0E0E6 35%, #C5E1A5 55%, #7CB342 62%, #558B2F 100%);
+        perspective:700px; perspective-origin:50% 35%; }
+      .sl-title-overlay { position:absolute; top:20px; left:50%; transform:translateX(-50%); z-index:30;
+        background:rgba(255,255,255,0.85); backdrop-filter:blur(8px); padding:8px 20px; border-radius:20px;
+        color:var(--main-dark); font-weight:900; font-size:1.05rem; letter-spacing:0.1em;
+        box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+      .sl-title-overlay .sub { display:block; font-size:0.68rem; color:var(--gray); font-weight:500; margin-top:2px; letter-spacing:0.05em; }
+
+      .sl-clouds { position:absolute; top:0; left:0; width:100%; height:30%; pointer-events:none; transition:transform 0.3s ease-out; }
       .sl-cloud { position:absolute; background:rgba(255,255,255,0.85); border-radius:50%; filter:blur(10px); }
-      .sl-mountains { position:absolute; bottom:38%; left:0; width:100%; height:25%; pointer-events:none; }
+      .sl-mountains { position:absolute; bottom:45%; left:0; width:100%; height:20%; pointer-events:none; z-index:1; transition:transform 0.3s ease-out; }
       .sl-mtn { position:absolute; bottom:0; width:0; height:0; border-style:solid; }
 
-      /* Ground (歩く道) */
-      .sl-ground { position:absolute; bottom:0; left:0; right:0; height:38%; z-index:2;
-        background:linear-gradient(180deg, #7CB342 0%, #558B2F 30%, #33691E 100%); }
-      .sl-ground-lines { position:absolute; inset:0; overflow:hidden; }
-      .sl-ground-lines::before { content:''; position:absolute; inset:0;
-        background:repeating-linear-gradient(90deg, transparent 0, transparent 60px, rgba(0,0,0,0.08) 60px, rgba(0,0,0,0.08) 62px);
-        will-change:transform; }
+      /* 地面：CSS 3D で傾けた大平面 */
+      .sl-floor { position:absolute; bottom:0; left:50%; width:300%; height:600px; transform-style:preserve-3d;
+        transform:translateX(-50%) translateZ(0) rotateX(75deg); transform-origin:50% 0%;
+        background:linear-gradient(180deg, #7CB342 0%, #558B2F 40%, #33691E 100%); }
+      .sl-floor-grid { position:absolute; inset:0; will-change:background-position;
+        background-image:
+          repeating-linear-gradient(90deg, transparent 0, transparent 80px, rgba(0,0,0,0.1) 80px, rgba(0,0,0,0.1) 82px),
+          repeating-linear-gradient(0deg, transparent 0, transparent 40px, rgba(0,0,0,0.08) 40px, rgba(0,0,0,0.08) 42px); }
+      .sl-path3d { position:absolute; left:50%; width:200px; top:0; bottom:0; transform:translateX(-50%);
+        background-color:#8D6E63;
+        background-image:linear-gradient(180deg, rgba(161,136,127,0.9), rgba(141,110,99,0.9)), repeating-linear-gradient(0deg, transparent 0, transparent 30px, rgba(255,255,255,0.45) 30px, rgba(255,255,255,0.45) 34px);
+        background-size:100% 100%, 100% 68px;
+        background-position:0 0, 0 var(--path-y, 0px);
+        border-left:2px solid #6D4C41; border-right:2px solid #6D4C41; }
 
-      /* Path (茶色の土の道) */
-      .sl-path-strip { position:absolute; bottom:0; left:0; right:0; height:22%; z-index:3;
-        background:linear-gradient(180deg, #A1887F 0%, #8D6E63 50%, #6D4C41 100%);
-        box-shadow:inset 0 4px 8px rgba(0,0,0,0.15); }
-      .sl-path-strip::before { content:''; position:absolute; inset:0;
-        background-image:radial-gradient(circle at 15% 50%, rgba(0,0,0,0.12) 2px, transparent 3px),
-                         radial-gradient(circle at 40% 30%, rgba(0,0,0,0.1) 2px, transparent 3px),
-                         radial-gradient(circle at 65% 70%, rgba(0,0,0,0.12) 2px, transparent 3px),
-                         radial-gradient(circle at 85% 40%, rgba(0,0,0,0.1) 2px, transparent 3px);
-        background-size:180px 100%; will-change:transform; }
-
-      /* Vegetation (木・花が流れる層) */
-      .sl-vegetation { position:absolute; bottom:22%; left:0; width:100%; height:60%; pointer-events:none; z-index:4; }
-      .sl-plant { position:absolute; bottom:0; will-change:transform; }
+      /* 植生：CSSパースペクティブで z軸配置 */
+      .sl-vegetation { position:absolute; inset:0; transform-style:preserve-3d; pointer-events:none; z-index:5; }
+      .sl-plant { position:absolute; left:50%; bottom:25%; transform-origin:50% 100%; will-change:transform; }
       .sl-tree { width:10px; height:70px; background:linear-gradient(180deg, #5D4037, #3E2723); border-radius:3px; position:relative; }
       .sl-tree::before { content:''; position:absolute; top:-42px; left:-18px; width:46px; height:48px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #66BB6A, #2E7D32 60%, #1B5E20); box-shadow:0 6px 16px rgba(0,0,0,0.25); }
-      .sl-flwr { font-size:1.6rem; line-height:1; text-shadow:0 2px 4px rgba(0,0,0,0.15); }
+      .sl-flwr { font-size:2rem; line-height:1; }
 
       /* -- avatar (centered on top of cylinder) -- */
       .sl-avatar { position:absolute; bottom:28%; left:50%; transform:translateX(-50%); z-index:10; transition:transform 0.5s cubic-bezier(.25,1.5,.5,1); }
@@ -1536,12 +1539,13 @@ footer {
 
     <div class="sl-ops" id="slOps">
       <div class="sl-world" id="slWorld">
+        <div class="sl-title-overlay">SecondLife版 基本操作<span class="sub">OPERATION — SECONDLIFE</span></div>
         <div class="sl-clouds" id="slClouds"></div>
         <div class="sl-mountains" id="slMtns"></div>
-        <div class="sl-ground">
-          <div class="sl-ground-lines" id="slGroundLines"></div>
+        <div class="sl-floor">
+          <div class="sl-floor-grid" id="slFloorGrid"></div>
+          <div class="sl-path3d" id="slPath3d"></div>
         </div>
-        <div class="sl-path-strip" id="slPathStrip"></div>
         <div class="sl-vegetation" id="slVeg"></div>
         <div class="sl-action" id="slAction"></div>
         <div class="sl-desc" id="slDesc"></div>
@@ -1576,15 +1580,18 @@ footer {
         mtns.appendChild(d);
       });
 
-      // ===== 3D遠近法の植生：各プラントに {z, xOff, type} を持たせ、毎フレーム位置計算 =====
+      // ===== CSS perspective 植生：translateZで奥行き、translateXで左右 =====
       const veg = document.getElementById('slVeg');
       const plants = [];
-      function spawnPlant(atFarZ) {
-        const p = document.createElement('div'); p.className='sl-plant';
-        const isFlower = Math.random() < 0.35;
+      const Z_FAR = -800;    // 最も奥
+      const Z_NEAR = 400;    // 最も手前（これを過ぎたら再配置）
+      function randomX() {
         const side = Math.random() < 0.5 ? -1 : 1;
-        const xOff = side * (80 + Math.random() * 300); // 道の左右
-        const z = atFarZ ? (0.85 + Math.random()*0.1) : (0.3 + Math.random()*0.7);
+        return side * (120 + Math.random() * 500);
+      }
+      function spawnPlant(z) {
+        const p = document.createElement('div'); p.className='sl-plant';
+        const isFlower = Math.random() < 0.4;
         if (isFlower) {
           const f = document.createElement('div'); f.className='sl-flwr';
           f.textContent=['🌸','🌼','🌺','🌻','🌷','🌱'][Math.floor(Math.random()*6)];
@@ -1594,37 +1601,29 @@ footer {
           p.appendChild(t);
         }
         veg.appendChild(p);
-        plants.push({ el: p, z, xOff, isFlower });
-        return plants[plants.length - 1];
+        const plant = { el: p, z: z, x: randomX(), isFlower };
+        plants.push(plant);
+        applyPlant(plant);
+        return plant;
       }
-      for (let i = 0; i < 24; i++) spawnPlant(false);
-
-      // 画面サイズを取得して遠近法のパラメータ決定
-      function getDims() {
-        const w = document.getElementById('slWorld');
-        return { W: w.clientWidth, H: w.clientHeight };
+      function applyPlant(p) {
+        p.el.style.transform = `translate3d(${p.x}px, 0, ${p.z}px)`;
+      }
+      // 初期配置：z を Z_FAR〜Z_NEAR に均等分布
+      const N = 36;
+      for (let i = 0; i < N; i++) {
+        const z = Z_FAR + ((Z_NEAR - Z_FAR) * i / N);
+        spawnPlant(z);
       }
 
-      // perspective rendering: 遠いほど小さく、上の方（地平線）に。近いほど大きく、下の方（画面下）に
-      function renderPlants() {
-        const { W, H } = getDims();
-        const cx = W / 2;
-        const horizonY = H * 0.38; // 地平線の画面上の位置
-        const groundY = H * 0.78;  // 近景の地面の位置
+      function advancePlants(dz) {
         plants.forEach(p => {
-          // z = 1 (遠) → 0 (近)。1から0に減ると前進感
-          const t = 1 - p.z;  // 0=遠, 1=近
-          const scale = 0.15 + t * 1.85; // 遠は0.15倍、近は2倍
-          const screenY = horizonY + (groundY - horizonY) * t;
-          const screenX = cx + p.xOff * t * t; // 近づくほど外側に広がる
-          const opacity = 0.3 + t * 0.7;
-          p.el.style.transform = `translate(${screenX}px, ${screenY}px) translate(-50%, -100%) scale(${scale})`;
-          p.el.style.opacity = opacity;
-          p.el.style.zIndex = Math.floor(100 + t * 100);
+          p.z += dz;
+          if (p.z > Z_NEAR) { p.z -= (Z_NEAR - Z_FAR); p.x = randomX(); }
+          if (p.z < Z_FAR) { p.z += (Z_NEAR - Z_FAR); p.x = randomX(); }
+          applyPlant(p);
         });
       }
-      renderPlants();
-      window.addEventListener('resize', renderPlants);
 
       // Keyboard layout
       const LIT='lit', DIM='dim';
@@ -1650,10 +1649,10 @@ footer {
 
       // Actions
       const avatar=document.getElementById('slAvatar'), action=document.getElementById('slAction'), desc=document.getElementById('slDesc');
-      const groundLines = document.getElementById('slGroundLines');
-      const pathStrip = document.getElementById('slPathStrip');
+      const floorGrid = document.getElementById('slFloorGrid');
+      const path3d = document.getElementById('slPath3d');
       const layers={clouds:document.getElementById('slClouds'),mtns:document.getElementById('slMtns')};
-      let cloudX=0, turnX=0, groundScrollY=0, pathScrollY=0, timer=null;
+      let cloudX=0, turnX=0, floorY=0, timer=null;
 
       const acts={
         w:{cls:'walk',dx:0,dy:-1,label:'前進',desc:'↑ / W で前に進みます',lit:['w','up']},
@@ -1697,36 +1696,26 @@ footer {
         heldKeys.forEach(k => {
           const a = acts[k];
           if (!a) return;
-          // dy: 前進=-1 (z減→近づく)、後退=+1 (z増→遠ざかる)
-          if (a.dy) forward += a.dy;
-          // dx: 旋回 左=+1, 右=-1
-          if (a.dx) turn += a.dx;
+          if (a.dy) forward += a.dy; // W:-1, S:+1
+          if (a.dx) turn += a.dx;    // A:+1, D:-1
         });
         if (forward !== 0) {
-          // 前進：全植物のzを減らす（近づく）、後退：増やす（遠ざかる）
-          const zStep = forward * 0.006; // forward: negative for W, positive for S
-          plants.forEach(p => {
-            p.z += zStep;
-            // 近すぎ（z<0.1）: 遠くに再配置
-            if (p.z < 0.05) { p.z = 0.95 + Math.random()*0.04; p.xOff = (Math.random()<0.5?-1:1) * (80+Math.random()*300); }
-            // 遠すぎ（z>1）: 近くに再配置（後退時）
-            if (p.z > 1) { p.z = 0.1 + Math.random()*0.15; }
-          });
-          // 地面ラインと道を縦にスクロール（奥から手前へ）
-          groundScrollY += -forward * 8;
-          pathScrollY += -forward * 12;
-          if (groundLines) groundLines.style.transform = `translateY(${groundScrollY % 62}px)`;
-          if (pathStrip) pathStrip.style.backgroundPosition = `0 ${pathScrollY}px`;
+          // 前進：植物のzを増やす（カメラ側＝正方向へ近づく）。W(forward=-1) → dz=+12
+          const dz = -forward * 12;
+          advancePlants(dz);
+          // 地面グリッドを縦にスクロール（奥→手前）
+          floorY += dz * 0.5;
+          if (floorGrid) floorGrid.style.backgroundPosition = `0 ${floorY}px, 0 ${floorY}px`;
+          if (path3d) path3d.style.setProperty('--path-y', (floorY % 68) + 'px');
         }
         if (turn !== 0) {
-          // 旋回：植物のxOffをずらして左右にパン
-          plants.forEach(p => { p.xOff += turn * 6; });
-          cloudX += turn * 1.5;
-          turnX += turn * 2;
+          // 旋回：植物のxをずらす（視点が逆にパン）
+          plants.forEach(p => { p.x += turn * 10; applyPlant(p); });
+          cloudX += turn * 2;
+          turnX += turn * 3;
           layers.clouds.style.transform = `translateX(${cloudX}px)`;
           layers.mtns.style.transform = `translateX(${turnX}px)`;
         }
-        renderPlants();
         moveRAF = requestAnimationFrame(moveLoop);
       }
 
