@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>導入セミナー｜ふくおかバーチャルさぽーとROOM</title>
+<meta name="description" content="ふくおかバーチャルさぽーとROOM（FVSR）の導入セミナーのご案内。サービス内容・活用事例・参加方法をご紹介します。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="導入セミナー｜ふくおかバーチャルさぽーとROOM">
+<meta property="og:description" content="ふくおかバーチャルさぽーとROOM（FVSR）の導入セミナーのご案内。サービス内容・活用事例・参加方法をご紹介します。">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script>if(localStorage.getItem('theme')==='night')document.documentElement.setAttribute('data-theme','night');</script>
+<style>
+:root {
+  --main: #00c6ff;
+  --main-dark: #0077b6;
+  --accent: #ac246f;
+  --yellow: #f2f26d;
+  --text: #1a1a2e;
+  --white: #fff;
+  --gray: #7b8ca3;
+}
+[data-theme="night"] {
+  --text: #e0e6ed;
+  --white: #e0e6ed;
+  --gray: #8a9bb0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 200%; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--text);
+  background: #ffffff;
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+  line-break: strict;
+  overflow-wrap: break-word;
+}
+h1, h2, h3, .hero-seminar, .hero-sub, .hero-badge, .section-title {
+  word-break: auto-phrase;
+  text-wrap: balance;
+}
+p, li, td, th, .body-text, .callout p, .card p, .flow-text p, .step-item p {
+  word-break: auto-phrase;
+}
+[data-theme="night"] body { background: #0d1117; }
+
+/* ===== CANVASES ===== */
+#ripples {
+  position: fixed; top:0; left:0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 50;
+  background: transparent !important;
+}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-60px);
+  transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(60px);
+  transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale {
+  opacity: 0; transform: scale(0.9);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+.delay-1 { transition-delay: 0.15s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.45s; }
+.delay-4 { transition-delay: 0.6s; }
+.delay-5 { transition-delay: 0.75s; }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #e8f4f8 0%, #f0f4ff 50%, #faf8ff 100%);
+}
+.hero-bg-circle {
+  position: absolute; border-radius: 50%;
+  filter: blur(120px); opacity: 0.18; will-change: transform;
+}
+.hero-bg-circle.c1 { width: 600px; height: 600px; background: #80deea; top: -15%; left: -10%; }
+.hero-bg-circle.c2 { width: 500px; height: 500px; background: #e1bee7; bottom: -10%; right: -8%; }
+.hero-bg-circle.c3 { width: 350px; height: 350px; background: #fff9c4; top: 50%; right: 25%; }
+.hero-inner { position: relative; z-index: 2; padding: 40px 20px; }
+.hero-badge {
+  display: inline-block;
+  background: rgba(0,198,255,0.06);
+  border: 1px solid rgba(0,198,255,0.15);
+  padding: 6px 24px; border-radius: 50px;
+  font-size: 0.82rem; font-weight: 500;
+  color: var(--main-dark); letter-spacing: 0.12em;
+  margin-bottom: 28px;
+}
+.hero-logo { display: block; width: 65vw; max-width: 900px; margin: 0 auto 24px; }
+.hero-seminar {
+  font-size: 2.4rem; font-weight: 900;
+  color: var(--main-dark); margin-bottom: 16px; line-height: 1.3;
+}
+.hero-sub {
+  font-size: 1rem; color: var(--gray);
+  letter-spacing: 0.18em; font-weight: 300; margin-bottom: 12px;
+}
+.hero-org { font-size: 0.78rem; color: #b0bec5; margin-top: 40px; }
+.scroll-hint {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  color: var(--gray); font-size: 0.7rem; letter-spacing: 0.15em;
+  animation: bounce 2.5s ease infinite;
+}
+.scroll-hint::after {
+  content: ''; width: 1px; height: 40px;
+  background: linear-gradient(180deg, var(--main), transparent);
+  margin-top: 8px;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ===== SECTION COMMON ===== */
+section { padding: 100px 20px; position: relative; }
+.container { max-width: 960px; margin: 0 auto; }
+.section-label {
+  font-size: 0.7rem; font-weight: 700; color: var(--main);
+  letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 12px;
+}
+.section-title {
+  font-size: 1.6rem; font-weight: 900; color: var(--text);
+  margin-bottom: 40px; line-height: 1.5; position: relative;
+}
+.section-title::after {
+  content: ''; display: block;
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, var(--main), var(--accent));
+  margin-top: 16px; border-radius: 2px;
+}
+
+/* ===== SPLIT LAYOUT (text + image side by side) ===== */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin: 32px 0;
+}
+.split.reverse { direction: rtl; }
+.split.reverse > * { direction: ltr; }
+
+.split-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(0,198,255,0.08), rgba(172,36,111,0.05));
+  border: 1.5px dashed rgba(0,198,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray); font-size: 0.7rem; font-weight: 400;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  position: relative;
+}
+.split-img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(0,198,255,0.06));
+  border-radius: 24px;
+}
+
+/* ===== TEXT ===== */
+.body-text {
+  font-size: 0.9rem; line-height: 2.2; color: #445; font-weight: 400;
+}
+.body-text + .body-text { margin-top: 16px; }
+
+/* ===== FEATURE LIST ===== */
+.feature-list { list-style: none; padding: 0; }
+.feature-list li {
+  padding: 12px 0 12px 28px; position: relative;
+  font-size: 0.88rem; line-height: 1.9;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+.feature-list li::before {
+  content: ''; position: absolute; left: 0; top: 0.9em;
+  width: 10px; height: 10px;
+  background: linear-gradient(135deg, var(--main), var(--main-dark));
+  border-radius: 50%;
+}
+
+/* ===== CARDS ===== */
+.card-row { display: grid; gap: 16px; margin-top: 28px; }
+.card-row.col-2 { grid-template-columns: 1fr 1fr; }
+.card-row.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+.card-row.col-5 { grid-template-columns: repeat(5, 1fr); }
+.card {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px; padding: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+}
+.card .icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+
+/* ----- SUPPORT 5枚カードの演出（採用：動-5 Spring物理 + 視覚-11 アニメボーダー（ホバー時のみ）） ----- */
+.support-grid .card {
+  position: relative;
+  transition: transform 0.55s cubic-bezier(.25,1.5,.5,1), box-shadow 0.4s;
+  z-index: 0;
+}
+.support-grid .card::before {
+  content: '';
+  position: absolute; inset: -1.5px;
+  border-radius: 22px; padding: 1.5px;
+  background: conic-gradient(from 0deg, var(--main), var(--accent), #f2f26d, var(--main));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: -1;
+}
+.support-grid .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.10);
+}
+.support-grid .card:hover::before {
+  opacity: 1;
+}
+.support-grid .card:hover .icon {
+  animation: support-icon-bounce 0.6s cubic-bezier(.25,1.5,.5,1);
+}
+@keyframes support-icon-bounce {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); }
+}
+.card h3 { font-size: 0.9rem; font-weight: 700; color: var(--main-dark); margin-bottom: 6px; }
+.card p { font-size: 0.78rem; line-height: 1.7; color: var(--gray); }
+
+/* ===== APP BOXES ===== */
+.app-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+.app-box {
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px; padding: 28px; text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.3s;
+}
+.app-box:hover { transform: translateY(-4px); }
+.app-box h3 { font-size: 1.1rem; color: var(--main-dark); margin-bottom: 12px; }
+.tag {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--main), var(--main-dark));
+  color: var(--white); padding: 3px 12px; border-radius: 20px;
+  font-size: 0.7rem; margin: 2px; font-weight: 600;
+}
+.app-box ul { text-align: left; list-style: none; padding: 0; margin-top: 14px; }
+.app-box ul li { padding: 5px 0 5px 20px; position: relative; font-size: 0.82rem; }
+.app-box ul li::before { content: '✓'; position: absolute; left: 0; color: var(--main); font-weight: 700; }
+.app-box ul li.app-ng { color: #e53e3e; }
+.app-box ul li.app-ng::before { content: '✗'; color: #e53e3e; }
+
+/* ===== TABLE ===== */
+.styled-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  margin-top: 24px; font-size: 0.8rem;
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.styled-table th, .styled-table td { padding: 12px 14px; text-align: center; border-bottom: 1px solid #eef2f6; }
+.styled-table thead th { background: linear-gradient(135deg, var(--main), var(--main-dark)); color: var(--white); font-weight: 700; font-size: 0.75rem; }
+.styled-table tbody th { background: #f8fbff; font-weight: 600; text-align: left; }
+.styled-table tbody td { background: var(--white); }
+.circle { color: var(--main-dark); font-size: 1.1rem; font-weight: 900; }
+.dash { color: #ddd; }
+
+/* ===== FLOW ===== */
+.flow-vertical { display: flex; flex-direction: column; align-items: center; gap: 0; margin-top: 28px; }
+.flow-item { display: flex; align-items: center; gap: 18px; padding: 18px; width: 100%; max-width: 480px; }
+.flow-num {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--main), var(--main-dark));
+  color: var(--white); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 900; flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,198,255,0.15);
+}
+.flow-num.goal {
+  background: linear-gradient(135deg, #00c6ff, #0077b6);
+  box-shadow: 0 4px 16px rgba(0,198,255,0.3);
+}
+.flow-text h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.flow-text p { font-size: 0.78rem; color: var(--gray); }
+.flow-line { width: 2px; height: 24px; background: linear-gradient(180deg, var(--main), rgba(0,198,255,0.1)); }
+
+/* ===== RULES ===== */
+.rules-box {
+  background: linear-gradient(135deg, #1e3a5f, #2a5a8a);
+  color: var(--white); border-radius: 20px;
+  padding: 32px; margin-top: 24px;
+  box-shadow: 0 8px 32px rgba(30,58,95,0.12);
+}
+.rules-box h3 { color: var(--yellow); margin: 20px 0 10px; font-size: 0.95rem; }
+.rules-box ul { list-style: none; padding: 0; }
+.rules-box ul li {
+  padding: 7px 0 7px 24px; position: relative;
+  font-size: 0.82rem; line-height: 1.8; color: #fff;
+}
+.rules-box ul li::before {
+  content: ''; position: absolute; left: 0; top: 0.85em;
+  width: 8px; height: 8px; background: var(--yellow); border-radius: 50%;
+}
+
+/* ===== SPEC TABLE ===== */
+.spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.spec-box {
+  background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px; padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+}
+.spec-box h3 { font-size: 0.95rem; color: var(--main-dark); margin-bottom: 12px; font-weight: 700; }
+.spec-list { list-style: none; padding: 0; }
+.spec-list li {
+  display: flex; justify-content: space-between; padding: 7px 0;
+  border-bottom: 1px solid #f0f4f8; font-size: 0.78rem;
+}
+.spec-list li span:first-child { font-weight: 600; color: var(--text); }
+.spec-list li span:last-child { color: var(--gray); }
+
+/* ===== STEPS ===== */
+.step-list { counter-reset: step; margin-top: 24px; }
+.step-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 18px; margin-bottom: 10px;
+  background: rgba(255,255,255,0.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.3s;
+}
+.step-item:hover { transform: translateX(4px); }
+.step-item::before {
+  counter-increment: step; content: counter(step);
+  background: linear-gradient(135deg, var(--main), var(--main-dark));
+  color: var(--white); font-size: 1rem; font-weight: 900;
+  min-width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-item h3 { font-size: 0.88rem; color: var(--main-dark); margin-bottom: 3px; }
+.step-item p { font-size: 0.78rem; line-height: 1.6; color: var(--gray); }
+
+/* ===== SECTION LOGO ===== */
+.section-logo {
+  position: absolute;
+  top: 24px; right: 24px;
+  width: 48px; height: 48px;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ===== CALLOUT ===== */
+.callout {
+  background: rgba(254,243,199,0.35);
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 14px 14px 0;
+  padding: 18px 22px; margin-top: 24px;
+}
+.callout p { font-size: 0.85rem; line-height: 1.8; }
+
+/* ===== REGISTRATION WIZARD ===== */
+.reg-headline {
+  text-align: center; padding: 24px; margin-bottom: 28px;
+  background: linear-gradient(135deg, rgba(0,198,255,0.06), rgba(0,119,182,0.04));
+  border: 1.5px solid rgba(0,198,255,0.15);
+  border-radius: 20px;
+}
+.reg-headline .big {
+  font-size: 1.3rem; font-weight: 900; color: var(--main-dark);
+  line-height: 1.6;
+}
+.reg-headline .sub {
+  font-size: 0.82rem; color: var(--gray); margin-top: 8px;
+}
+.reg-glossary {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;
+  margin-bottom: 32px;
+}
+.reg-glossary-item {
+  padding: 14px; border-radius: 14px; text-align: center;
+  background: rgba(255,255,255,0.6); backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+.reg-glossary-item h4 {
+  font-size: 0.82rem; font-weight: 700; color: var(--main-dark); margin-bottom: 4px;
+}
+.reg-glossary-item p {
+  font-size: 0.68rem; color: var(--gray); line-height: 1.6;
+}
+.wizard-label {
+  font-size: 0.95rem; font-weight: 700; color: var(--text);
+  margin-bottom: 16px; text-align: center;
+}
+.wizard-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+  margin-bottom: 24px;
+}
+.wizard-btn {
+  padding: 14px 8px; border-radius: 14px; text-align: center;
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(12px);
+  border: 2px solid rgba(0,0,0,0.06);
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+}
+.wizard-btn:hover { border-color: var(--main); transform: translateY(-2px); }
+.wizard-btn.selected {
+  border-color: var(--main);
+  background: rgba(0,198,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,198,255,0.15);
+}
+.wizard-btn .wz-icon { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+.wizard-btn .wz-name { font-size: 0.72rem; font-weight: 700; color: var(--text); }
+.wizard-result {
+  min-height: 80px; padding: 20px; border-radius: 16px; text-align: center;
+  background: linear-gradient(135deg, rgba(0,198,255,0.04), rgba(0,119,182,0.02));
+  border: 1.5px dashed rgba(0,198,255,0.2);
+  margin-bottom: 24px;
+  transition: all 0.4s;
+}
+.wizard-result.has-result {
+  border-style: solid; border-color: var(--main);
+  background: linear-gradient(135deg, rgba(0,198,255,0.08), rgba(0,119,182,0.04));
+}
+.wizard-result .result-text {
+  font-size: 0.9rem; font-weight: 700; color: var(--main-dark); line-height: 1.8;
+}
+.wizard-result .result-detail {
+  font-size: 0.75rem; color: var(--gray); margin-top: 6px;
+}
+.wizard-result .result-tag {
+  display: inline-block; padding: 3px 12px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 600; color: #fff; margin: 3px 2px;
+}
+.wizard-result .result-tag.t1 { background: linear-gradient(135deg, var(--main), var(--main-dark)); }
+.wizard-result .result-tag.t2 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+.wizard-result .result-tag.t3 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.reg-reassure {
+  text-align: center; padding: 20px;
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.15);
+  border-radius: 16px;
+}
+.reg-reassure p { font-size: 0.82rem; line-height: 1.9; color: var(--text); }
+.reg-reassure strong { color: #059669; }
+/* night mode */
+[data-theme="night"] .reg-headline { background: rgba(0,198,255,0.04); border-color: rgba(0,198,255,0.15); }
+[data-theme="night"] .reg-headline .big { color: var(--main); }
+[data-theme="night"] .reg-glossary-item { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.06); }
+[data-theme="night"] .reg-glossary-item h4 { color: var(--main); }
+[data-theme="night"] .wizard-btn { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+[data-theme="night"] .wizard-btn.selected { background: rgba(0,198,255,0.1); border-color: var(--main); }
+[data-theme="night"] .wizard-result { background: rgba(0,198,255,0.03); border-color: rgba(0,198,255,0.15); }
+[data-theme="night"] .wizard-result.has-result { background: rgba(0,198,255,0.06); }
+[data-theme="night"] .wizard-result .result-text { color: var(--main); }
+[data-theme="night"] .reg-reassure { background: rgba(16,185,129,0.04); border-color: rgba(16,185,129,0.1); }
+[data-theme="night"] .reg-reassure strong { color: #34d399; }
+@media (max-width: 768px) {
+  .reg-glossary { grid-template-columns: 1fr; }
+  .wizard-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 480px) {
+  .wizard-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===== OPERATION ANIMATIONS ===== */
+.op-scene {
+  width: 100%; height: 140px; border-radius: 14px; margin-bottom: 12px;
+  background: linear-gradient(135deg, #1a1a3e, #2d2b55);
+  position: relative; overflow: hidden;
+  box-shadow: inset 0 2px 12px rgba(0,0,0,0.3);
+}
+.op-scene * { position: absolute; }
+
+/* -- cursor -- */
+.cursor-anim {
+  width: 18px; height: 18px; z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+.cursor-anim::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  border-left: 7px solid #fff; border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transform: rotate(-30deg); transform-origin: top left;
+  width: 0; height: 0;
+  border-left: 8px solid #fff; border-right: 8px solid transparent;
+  border-bottom: 14px solid #fff; border-top: 0;
+  clip-path: polygon(0 0, 50% 100%, 100% 60%, 35% 55%, 65% 100%, 50% 100%, 0 0);
+}
+.cursor-anim::after {
+  content: ''; position: absolute;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(0,198,255,0.3); top: -4px; left: -4px;
+  animation: cursorPulse 1.5s ease infinite;
+}
+@keyframes cursorPulse {
+  0%,100% { transform: scale(0); opacity: 0.6; }
+  50% { transform: scale(2); opacity: 0; }
+}
+
+/* -- avatar (simple) -- */
+.mini-avatar {
+  width: 24px; height: 40px;
+}
+.mini-avatar .av-head {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: linear-gradient(135deg, #ffd6a0, #f0b878);
+  top: 0; left: 50%; transform: translateX(-50%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.mini-avatar .av-body {
+  width: 18px; height: 20px; border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(135deg, #5b8def, #3a6bd5);
+  top: 13px; left: 50%; transform: translateX(-50%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.mini-avatar .av-legs {
+  width: 14px; height: 8px; top: 32px; left: 50%; transform: translateX(-50%);
+}
+.mini-avatar .av-legs::before, .mini-avatar .av-legs::after {
+  content: ''; position: absolute;
+  width: 5px; height: 8px; border-radius: 2px;
+  background: #3a5a8a;
+}
+.mini-avatar .av-legs::before { left: 0; }
+.mini-avatar .av-legs::after { right: 0; }
+
+/* -- keyboard key -- */
+.key {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; padding: 0 6px;
+  background: linear-gradient(180deg, #f5f5f5, #d8d8d8);
+  border: 1px solid #bbb; border-bottom: 3px solid #999;
+  border-radius: 5px; font-size: 11px; font-weight: 700;
+  color: #333; font-family: monospace;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.15s;
+}
+.key.pressed {
+  background: linear-gradient(180deg, #d0e8ff, #a0c8f0);
+  border-color: #6aadea; border-bottom-width: 1px;
+  transform: translateY(2px);
+  box-shadow: 0 0 12px rgba(0,198,255,0.4);
+}
+
+/* -- SIT scene -- */
+.sit-chair {
+  width: 36px; height: 30px; bottom: 20px; left: 50%; transform: translateX(-50%);
+}
+.sit-chair .seat {
+  width: 36px; height: 8px; background: linear-gradient(135deg, #8B4513, #A0522D);
+  border-radius: 3px; bottom: 10px; left: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.sit-chair .leg-l, .sit-chair .leg-r {
+  width: 4px; height: 12px; background: #6B3410; border-radius: 1px; bottom: 0;
+}
+.sit-chair .leg-l { left: 4px; }
+.sit-chair .leg-r { right: 4px; }
+.sit-chair .back {
+  width: 4px; height: 22px; background: linear-gradient(180deg, #A0522D, #8B4513);
+  border-radius: 2px; bottom: 8px; left: 4px;
+}
+@keyframes sitDown {
+  0%,30% { bottom: 65px; }
+  50%,100% { bottom: 30px; }
+}
+@keyframes sitLabel {
+  0%,20% { opacity: 0; transform: translate(-50%,-50%) scale(0.5); }
+  35%,65% { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+  80%,100% { opacity: 0; }
+}
+
+/* -- WALK scene -- */
+@keyframes walkRight {
+  0% { left: -10%; }
+  100% { left: 110%; }
+}
+@keyframes walkLegs {
+  0%,100% { transform: translateX(-50%) rotate(-15deg); }
+  50% { transform: translateX(-50%) rotate(15deg); }
+}
+@keyframes arrowPress {
+  0%,40% { opacity: 1; }
+  10%,30% { opacity: 1; }
+  15%,25% { transform: translateY(2px); background: linear-gradient(180deg, #d0e8ff, #a0c8f0); border-color: #6aadea; box-shadow: 0 0 10px rgba(0,198,255,0.4); }
+}
+.arrow-keys { bottom: 12px; left: 50%; transform: translateX(-50%); }
+
+/* -- CHAT scene -- */
+@keyframes chatType {
+  0% { width: 0; }
+  60% { width: 80px; }
+  80%,100% { width: 80px; }
+}
+@keyframes chatBubble {
+  0%,65% { opacity: 0; transform: translateY(10px) scale(0.8); }
+  75%,95% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; }
+}
+@keyframes enterPress {
+  0%,55% { background: linear-gradient(180deg, #f5f5f5, #d8d8d8); border-color: #bbb; transform: translateY(0); }
+  60%,70% { background: linear-gradient(180deg, #d0e8ff, #a0c8f0); border-color: #6aadea; transform: translateY(2px); box-shadow: 0 0 12px rgba(0,198,255,0.4); }
+  75%,100% { background: linear-gradient(180deg, #f5f5f5, #d8d8d8); border-color: #bbb; transform: translateY(0); }
+}
+
+/* -- CAMERA scene -- */
+@keyframes cameraRotate {
+  0% { transform: translate(-50%, -50%) perspective(200px) rotateY(0deg); }
+  50% { transform: translate(-50%, -50%) perspective(200px) rotateY(25deg); }
+  100% { transform: translate(-50%, -50%) perspective(200px) rotateY(0deg); }
+}
+@keyframes cameraCursor {
+  0%,100% { left: 40%; top: 50%; }
+  25% { left: 60%; top: 35%; }
+  50% { left: 70%; top: 55%; }
+  75% { left: 45%; top: 65%; }
+}
+
+/* -- TEA scene -- */
+@keyframes steamRise {
+  0% { opacity: 0.8; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.5); }
+}
+@keyframes teaCursorClick {
+  0%,40% { left: 55%; top: 45%; }
+  45%,55% { left: 55%; top: 45%; }
+  50% { transform: scale(0.8); }
+  60%,100% { left: 55%; top: 45%; }
+}
+
+/* -- TIME scene -- */
+@keyframes sunMoon {
+  0%,20% { background: linear-gradient(180deg, #87CEEB 0%, #f0e68c 60%, #ffa07a 100%); }
+  40%,60% { background: linear-gradient(180deg, #ff6b6b 0%, #ff8c42 40%, #2d1b69 100%); }
+  70%,100% { background: linear-gradient(180deg, #0a0a2e 0%, #1a1a4e 50%, #2d2b55 100%); }
+}
+@keyframes sunOrb {
+  0%,20% { left: 50%; top: 25%; background: #FFD700; box-shadow: 0 0 20px #FFD700; }
+  40%,60% { left: 75%; top: 45%; background: #ff6347; box-shadow: 0 0 15px #ff6347; }
+  70%,100% { left: 50%; top: 25%; background: #E8E8FF; box-shadow: 0 0 12px #aab8ff; width: 16px; height: 16px; }
+}
+@keyframes starsAppear {
+  0%,60% { opacity: 0; }
+  75%,100% { opacity: 1; }
+}
+.star { width: 2px; height: 2px; background: #fff; border-radius: 50%; }
+
+/* ===== OPERATION THEATER (ZZZ-style) ===== */
+.op-theater {
+  margin-top: 28px; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(135deg, #0a0a1a 0%, #141428 50%, #0d0d20 100%);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  max-width: 1100px; margin-left: auto; margin-right: auto;
+}
+.op-theater-main {
+  display: grid; grid-template-columns: 55% 45%;
+  min-height: 400px; position: relative;
+}
+.op-theater-stage {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0d0d24, #1a1a3e);
+  display: flex; align-items: center; justify-content: center;
+}
+.op-theater-stage .op-scene {
+  width: 100%; height: 100%; border-radius: 0; margin: 0;
+  position: absolute; top: 0; left: 0;
+  opacity: 0; transform: translateX(-60px) scale(0.95);
+  transition: all 0.6s cubic-bezier(.22,.61,.36,1);
+  pointer-events: none;
+}
+.op-theater-stage .op-scene.active {
+  opacity: 1; transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+.op-theater-stage .op-scene video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.op-theater-info {
+  padding: 32px 28px; display: flex; flex-direction: column;
+  justify-content: center; position: relative; overflow: hidden;
+}
+.op-theater-info .info-content {
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(.22,.61,.36,1) 0.15s;
+  position: absolute; top: 28px; left: 28px; right: 28px; bottom: 28px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.op-theater-info .info-content.active {
+  opacity: 1; transform: translateY(0);
+}
+.op-info-badge {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--main), var(--main-dark));
+  color: #fff; margin-bottom: 14px; width: fit-content;
+}
+.op-info-title {
+  font-size: 1.2rem; font-weight: 900; color: #fff;
+  margin-bottom: 10px; line-height: 1.4;
+}
+.op-info-desc {
+  font-size: 0.82rem; line-height: 1.9; color: rgba(255,255,255,0.92);
+}
+.op-info-keys {
+  display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap;
+}
+.op-info-keys .key {
+  position: relative; font-size: 14px; min-width: 38px; height: 32px;
+}
+.op-info-hint {
+  font-size: 0.72rem; color: rgba(255,255,255,0.62); margin-top: 16px;
+  font-style: italic;
+}
+
+/* -- tab bar -- */
+.op-theater-tabs {
+  display: flex; border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.3);
+}
+.op-tab {
+  flex: 1; padding: 16px 8px; text-align: center;
+  cursor: pointer; transition: all 0.3s;
+  border-right: 1px solid rgba(255,255,255,0.04);
+  position: relative; overflow: hidden;
+}
+.op-tab:last-child { border-right: none; }
+.op-tab::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--main), var(--accent));
+  transform: scaleX(0); transition: transform 0.4s cubic-bezier(.22,.61,.36,1);
+  transform-origin: left;
+}
+.op-tab.active::before { transform: scaleX(1); }
+.op-tab:hover { background: rgba(255,255,255,0.04); }
+.op-tab.active { background: rgba(0,198,255,0.06); }
+.op-tab .tab-icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+.op-tab .tab-label {
+  font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.78);
+  letter-spacing: 0.05em; transition: color 0.3s;
+}
+.op-tab.active .tab-label { color: var(--main); }
+.op-tab:hover .tab-label { color: rgba(255,255,255,0.7); }
+
+/* -- glitch line effect on switch -- */
+.op-theater-stage .glitch-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px; z-index: 10;
+  background: linear-gradient(90deg, transparent, var(--main), transparent);
+  opacity: 0; transform: translateY(0);
+  pointer-events: none;
+}
+.op-theater-stage .glitch-line.flash {
+  animation: glitchSweep 0.5s ease forwards;
+}
+@keyframes glitchSweep {
+  0% { opacity: 1; top: 0; }
+  100% { opacity: 0; top: 100%; }
+}
+
+/* -- corner decorations -- */
+.op-theater::before, .op-theater::after {
+  content: ''; position: absolute; width: 40px; height: 40px;
+  border: 1.5px solid rgba(0,198,255,0.15); z-index: 5; pointer-events: none;
+}
+.op-theater::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.op-theater::after { bottom: 60px; right: 12px; border-left: none; border-top: none; }
+
+/* -- responsive -- */
+@media (max-width: 768px) {
+  .op-theater-main { grid-template-columns: 1fr; min-height: auto; }
+  .op-theater-stage { min-height: 200px; }
+  .op-theater-main { min-height: auto; }
+  .op-theater-info { padding: 20px 18px; min-height: 240px; }
+  .op-theater-info .info-content { top: 20px; left: 18px; right: 18px; bottom: 20px; }
+  .op-info-title { font-size: 1.1rem; }
+  .op-info-desc { font-size: 0.78rem; line-height: 1.9; }
+  .op-info-hint { font-size: 0.65rem; }
+  .op-tab { padding: 12px 4px; }
+  .op-tab .tab-icon { font-size: 1.1rem; }
+  .op-tab .tab-label { font-size: 0.55rem; }
+  .op-theater::before, .op-theater::after { display: none; }
+}
+@media (max-width: 480px) {
+  .op-theater-tabs { flex-wrap: wrap; }
+  .op-tab { flex: 1 0 25%; }
+  .op-info-keys .key { min-width: 28px; height: 24px; font-size: 9px; }
+  .op-theater-info { min-height: 220px; }
+  .op-info-title { font-size: 1rem; }
+  .op-info-desc { font-size: 0.72rem; line-height: 1.8; }
+}
+
+/* ===== VIDEO PLACEHOLDER ===== */
+.video-box {
+  margin-top: 24px; border-radius: 20px; overflow: hidden;
+  background: linear-gradient(135deg, #0d1117, #1a1a3e);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  position: relative;
+}
+.video-box video {
+  width: 100%; display: block; border-radius: 20px;
+}
+.video-placeholder {
+  aspect-ratio: 16 / 9; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+  color: rgba(255,255,255,0.4); font-size: 0.8rem;
+  border: 2px dashed rgba(255,255,255,0.1); border-radius: 20px;
+  background: linear-gradient(135deg, #0d1117, #1a1a3e);
+}
+.video-placeholder .ph-icon { font-size: 2.5rem; opacity: 0.5; }
+.video-placeholder .ph-text { font-weight: 500; letter-spacing: 0.05em; }
+.video-label {
+  font-size: 0.82rem; font-weight: 600; color: var(--main-dark);
+  margin-top: 20px; margin-bottom: 8px;
+}
+[data-theme="night"] .video-label { color: var(--main); }
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+  padding: 100px 20px; text-align: center;
+  background: linear-gradient(180deg, var(--white), #f0f7ff);
+  position: relative;
+}
+.cta-section .hero-logo { max-width: 450px; margin-bottom: 28px; opacity: 0.85; }
+.cta-section h2 { font-size: 1.6rem; font-weight: 900; color: var(--main-dark); margin-bottom: 16px; line-height: 1.6; }
+.cta-section p { font-size: 0.9rem; color: var(--gray); margin-bottom: 8px; }
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent), #d63384);
+  color: var(--white); padding: 14px 44px; border-radius: 50px;
+  font-size: 1rem; font-weight: 700; text-decoration: none;
+  margin-top: 28px; box-shadow: 0 6px 24px rgba(172,36,111,0.15);
+  transition: all 0.3s;
+}
+.cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(172,36,111,0.25); }
+
+/* ===== FLOATING CTA ===== */
+.float-cta {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px);
+  z-index: 100;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  color: var(--main-dark); text-decoration: none;
+  padding: 10px 28px; border-radius: 50px;
+  font-size: 0.8rem; font-weight: 600;
+  border: 1px solid rgba(0,119,182,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: all 0.5s cubic-bezier(.22,.61,.36,1);
+  letter-spacing: 0.06em;
+  opacity: 0; pointer-events: none;
+}
+.float-cta.visible {
+  opacity: 1; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.float-cta:hover {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(0,119,182,0.3);
+  box-shadow: 0 8px 32px rgba(0,119,182,0.12);
+  transform: translateX(-50%) translateY(-3px);
+}
+.float-cta:active { transform: translateX(-50%) translateY(1px); }
+.float-cta .cta-icon { font-size: 0.95rem; }
+[data-theme="night"] .float-cta {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(0,198,255,0.2);
+  color: var(--main);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+[data-theme="night"] .float-cta:hover {
+  background: rgba(0,198,255,0.1);
+  border-color: rgba(0,198,255,0.35);
+  box-shadow: 0 8px 32px rgba(0,198,255,0.15);
+}
+@media (max-width: 480px) {
+  .float-cta { padding: 9px 20px; font-size: 0.72rem; bottom: 80px; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 40px 20px; text-align: center;
+  font-size: 0.7rem; color: #b0bec5; background: #f8fbff;
+}
+
+/* ===== FLOATING CONTROLS ===== */
+.bgm-float {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  background-size: 300% 300%;
+  border: none;
+  cursor: pointer; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  box-shadow:
+    0 8px 25px rgba(102,126,234,0.35),
+    0 3px 10px rgba(0,0,0,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: all 0.4s cubic-bezier(.22,.61,.36,1);
+  position: relative;
+  overflow: hidden;
+  animation: fabGradient 6s ease infinite;
+}
+@keyframes fabGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.bgm-float::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 60%);
+  pointer-events: none;
+}
+.bgm-float::after {
+  content: '';
+  position: absolute; inset: 3px;
+  border-radius: 50%;
+  background: rgba(15,20,40,0.55);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s;
+}
+.bgm-float:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow:
+    0 14px 36px rgba(102,126,234,0.45),
+    0 5px 15px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  animation-duration: 3s;
+}
+.bgm-float:active {
+  transform: translateY(1px) scale(0.93);
+  box-shadow:
+    0 4px 12px rgba(102,126,234,0.3),
+    0 2px 6px rgba(0,0,0,0.1);
+}
+.bgm-float.playing {
+  box-shadow:
+    0 8px 25px rgba(0,198,255,0.4),
+    0 3px 10px rgba(0,0,0,0.1),
+    0 0 30px rgba(0,198,255,0.2);
+}
+.bgm-float.playing::after {
+  background: rgba(0,198,255,0.15);
+}
+.bgm-float .btn-icon {
+  position: relative; z-index: 1;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+}
+
+/* ===== ACCENT BLOB (floating background decoration) ===== */
+.accent-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* ===== NIGHT MODE ===== */
+[data-theme="night"] .hero { background: linear-gradient(160deg, #0a1628 0%, #111b2e 50%, #0d1520 100%); }
+[data-theme="night"] .hero-bg-circle { opacity: 0.08; }
+[data-theme="night"] .hero-badge { background: rgba(0,198,255,0.1); border-color: rgba(0,198,255,0.25); color: var(--main); }
+[data-theme="night"] .hero-seminar { color: var(--main); }
+[data-theme="night"] .hero-org { color: rgba(255,255,255,0.3); }
+[data-theme="night"] section { transition: background 0.5s; }
+[data-theme="night"] .section-title { color: var(--text); }
+[data-theme="night"] .section-label { color: var(--main); }
+[data-theme="night"] .card {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+[data-theme="night"] .card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+[data-theme="night"] .card h3 { color: var(--main); }
+[data-theme="night"] .app-box {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+[data-theme="night"] .app-box h3 { color: var(--main); }
+[data-theme="night"] .app-box ul li { color: var(--gray); }
+[data-theme="night"] .app-box::after { background: linear-gradient(90deg, var(--main), var(--accent)); }
+[data-theme="night"] .tag { background: linear-gradient(135deg, var(--main), var(--main-dark)); }
+[data-theme="night"] .styled-table tbody th { background: rgba(255,255,255,0.04); color: var(--text); }
+[data-theme="night"] .styled-table tbody td { background: rgba(255,255,255,0.02); color: var(--text); }
+[data-theme="night"] .styled-table tbody tr:hover td { background: rgba(0,198,255,0.06); }
+[data-theme="night"] .styled-table th, [data-theme="night"] .styled-table td { border-bottom-color: rgba(255,255,255,0.06); }
+[data-theme="night"] .flow-item, [data-theme="night"] .step-item, [data-theme="night"] .spec-box {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+[data-theme="night"] .step-item h3, [data-theme="night"] .spec-box h3 { color: var(--main); }
+[data-theme="night"] .spec-list li { border-bottom-color: rgba(255,255,255,0.06); }
+[data-theme="night"] .feature-list li { border-bottom-color: rgba(255,255,255,0.06); color: var(--text); }
+[data-theme="night"] .callout {
+  background: rgba(254,243,199,0.06);
+  border-left-color: #b47a0a;
+}
+[data-theme="night"] .callout p { color: var(--gray); }
+[data-theme="night"] .body-text { color: var(--gray); }
+[data-theme="night"] .rules-box { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+[data-theme="night"] .split-img { background: rgba(255,255,255,0.03); border-color: rgba(0,198,255,0.15); }
+[data-theme="night"] .cta-section { background: linear-gradient(180deg, #0d1117, #111b2e); }
+[data-theme="night"] .cta-section h2 { color: var(--main); }
+[data-theme="night"] footer { background: #060a10; color: rgba(255,255,255,0.3); }
+[data-theme="night"] .accent-blob { opacity: 0.04; }
+[data-theme="night"] #pageCounter { color: rgba(255,255,255,0.45) !important; }
+[data-theme="night"] #versionLabel { color: rgba(255,255,255,0.25) !important; }
+#pageCounter { color: rgba(0,0,0,0.35); }
+#versionLabel { color: rgba(0,0,0,0.25); }
+[data-theme="night"] .hero-sub { color: rgba(255,255,255,0.6); }
+[data-theme="night"] .hero-org { color: rgba(255,255,255,0.35); }
+[data-theme="night"] .scroll-hint { color: rgba(255,255,255,0.5); }
+[data-theme="night"] .scroll-hint::after { background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent); }
+[data-theme="night"] .body-text { color: rgba(255,255,255,0.7); }
+[data-theme="night"] .circle { color: var(--main); }
+[data-theme="night"] .dash { color: rgba(255,255,255,0.2); }
+[data-theme="night"] .rules-box ul li { color: rgba(255,255,255,0.75); }
+[data-theme="night"] .rules-box h3 { color: var(--yellow); }
+[data-theme="night"] .flow-text h3 { color: var(--text); }
+[data-theme="night"] .spec-list li span:first-child { color: var(--text); }
+[data-theme="night"] .spec-list li span:last-child { color: var(--gray); }
+[data-theme="night"] .cta-section p { color: rgba(255,255,255,0.55); }
+[data-theme="night"] .cta-btn { color: #fff; }
+[data-theme="night"] .callout strong { color: var(--text); }
+[data-theme="night"] .styled-table .circle { color: var(--main); }
+[data-theme="night"] .tag { color: #fff; }
+[data-theme="night"] .app-box ul li::before { color: var(--main); }
+[data-theme="night"] .feature-list li::before { box-shadow: 0 2px 8px rgba(0,198,255,0.4); }
+[data-theme="night"] span[style*="color:#94a3b8"] { color: rgba(255,255,255,0.4) !important; }
+
+/* Night mode toggle button */
+.night-toggle {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a1a3e 0%, #2d2b55 50%, #0d1117 100%);
+  border: 2px solid rgba(255,255,255,0.1);
+  cursor: pointer; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  box-shadow:
+    0 8px 25px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: all 0.4s cubic-bezier(.22,.61,.36,1);
+  position: relative;
+}
+.night-toggle:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.4), 0 0 20px rgba(0,198,255,0.15);
+}
+.night-toggle:active { transform: translateY(1px) scale(0.93); }
+.night-toggle.active {
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f4f8 50%, #fff 100%);
+  border-color: rgba(0,198,255,0.2);
+  box-shadow: 0 8px 25px rgba(0,120,200,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  html { font-size: 175%; }
+  .hero-seminar { font-size: 1.6rem; }
+  .hero-logo { max-width: 300px; width: 80vw; }
+  .section-title { font-size: 1.3rem; }
+  section { padding: 70px 16px; }
+  .split { grid-template-columns: 1fr; gap: 28px; }
+  .split.reverse { direction: ltr; }
+  .card-row.col-2, .card-row.col-3, .app-row, .spec-grid { grid-template-columns: 1fr; }
+  .card-row.col-5 { grid-template-columns: 1fr 1fr; }
+  .flow-item { max-width: 100%; }
+  .styled-table { font-size: 0.7rem; }
+  .styled-table th, .styled-table td { padding: 8px 6px; }
+  .cta-section h2 { font-size: 1.3rem; }
+  .cta-section .hero-logo { max-width: 280px; width: 60vw; }
+  .cta-btn { padding: 12px 32px; font-size: 0.9rem; }
+  .section-logo { width: 36px; height: 36px; top: 16px; right: 16px; }
+  .hero-bg-circle.c1 { width: 300px; height: 300px; }
+  .hero-bg-circle.c2 { width: 250px; height: 250px; }
+  .hero-bg-circle.c3 { width: 180px; height: 180px; }
+  .split-img { aspect-ratio: 16/10; }
+  .rules-box { padding: 24px 20px; }
+  .app-box { padding: 20px; }
+  .reg-headline .big { font-size: 1.1rem; }
+  .bgm-float { width: 48px; height: 48px; font-size: 1.1rem; }
+  .night-toggle { width: 48px; height: 48px; font-size: 1.1rem; }
+  img[style*="width:120%"] { width: 100% !important; max-width: 100% !important; }
+}
+@media (max-width: 480px) {
+  html { font-size: 150%; }
+  .hero-seminar { font-size: 1.3rem; }
+  .hero-sub { font-size: 0.85rem; letter-spacing: 0.1em; }
+  .hero-badge { font-size: 0.72rem; padding: 5px 16px; }
+  .card-row.col-5 { grid-template-columns: 1fr; }
+  section { padding: 56px 14px; }
+  .container { padding: 0; }
+  .styled-table { font-size: 0.65rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .styled-table th, .styled-table td { padding: 8px 5px; white-space: nowrap; }
+  .spec-list li { flex-direction: column; gap: 2px; }
+  .spec-list li span:last-child { font-size: 0.72rem; }
+  .step-item { padding: 14px; gap: 12px; }
+  .step-item::before { min-width: 30px; height: 30px; font-size: 0.85rem; }
+  .flow-num { width: 40px; height: 40px; font-size: 1rem; }
+  .flow-item { gap: 14px; padding: 14px; }
+  .rules-box { padding: 20px 16px; }
+  .rules-box ul li { font-size: 0.75rem; padding-left: 20px; }
+  .callout { padding: 14px 16px; }
+  .callout p { font-size: 0.78rem; }
+  .body-text { font-size: 0.82rem; }
+  .feature-list li { font-size: 0.8rem; padding: 10px 0 10px 24px; }
+  .card { padding: 18px; }
+  .card h3 { font-size: 0.82rem; }
+  .card p { font-size: 0.72rem; }
+  .app-box { padding: 18px; }
+  .app-box h3 { font-size: 0.95rem; }
+  .app-box ul li { font-size: 0.75rem; }
+  .wizard-grid { grid-template-columns: repeat(3, 1fr); }
+  .wizard-btn { padding: 10px 6px; }
+  .wizard-btn .wz-icon { font-size: 1.2rem; }
+  .wizard-btn .wz-name { font-size: 0.65rem; }
+  .reg-headline .big { font-size: 1rem; }
+  .reg-headline .sub { font-size: 0.72rem; }
+  .reg-glossary-item h4 { font-size: 0.75rem; }
+  .reg-glossary-item p { font-size: 0.62rem; }
+  .bgm-float { width: 36px; height: 36px; font-size: 0.85rem; }
+  .night-toggle { width: 36px; height: 36px; font-size: 0.85rem; }
+  .cta-section h2 { font-size: 1.1rem; }
+  .cta-section p { font-size: 0.75rem; word-break: break-all; }
+  .cta-btn { padding: 10px 28px; font-size: 0.85rem; }
+  footer { font-size: 0.6rem; padding: 28px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div id="versionLabel" style="position:fixed;top:12px;right:16px;z-index:999;font-size:0.55rem;letter-spacing:0.05em;">v9.8</div>
+<div id="pageCounter" style="position:fixed;top:12px;left:16px;z-index:999;font-size:0.6rem;letter-spacing:0.05em;font-weight:500;">1 / 16</div>
+<canvas id="ripples"></canvas>
+<audio id="bgm" loop preload="auto"><source src="assets/bgm.mp3" type="audio/mpeg"></audio>
+
+<!-- FLOATING CTA -->
+<a class="float-cta" id="floatCta" href="https://fvsapo.pref.fukuoka.lg.jp/register/#:~:text=%E3%81%AE%E5%88%A9%E7%94%A8%E7%99%BB%E9%8C%B2-,%E7%99%BB%E9%8C%B2%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0,-%E4%BB%A5%E4%B8%8B%E3%81%AE%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0" target="_blank"><span class="cta-icon">📝</span>利用登録はこちら</a>
+
+<!-- FLOATING CONTROLS -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:100;display:flex;flex-direction:column;gap:14px;align-items:center;">
+  <div class="night-toggle" id="nightBtn" onclick="toggleNight()" title="ナイトモード">🌙</div>
+  <div class="bgm-float" id="autoScrollBtn" onclick="toggleAutoScroll()" title="自動スクロール"><span class="btn-icon">▶</span></div>
+  <div class="bgm-float" id="bgmBtn" onclick="toggleBGM()" title="BGM 再生/停止"><span class="btn-icon">🔇</span></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+  <div class="hero-bg-circle c1" data-parallax="0.03"></div>
+  <div class="hero-bg-circle c2" data-parallax="0.05"></div>
+  <div class="hero-bg-circle c3" data-parallax="0.04"></div>
+  <div class="hero-inner">
+    <div class="hero-badge reveal">メタバース活用就労支援事業</div>
+    <img src="assets/logo.png" alt="ふくおかバーチャルさぽーとROOM" class="hero-logo reveal delay-1">
+    <h1 class="hero-seminar reveal delay-2">導入セミナー</h1>
+    <div class="hero-sub reveal delay-3">アバターでつながる、バーチャルでひろがる、あなたの一歩</div>
+    <div class="hero-org reveal delay-4">福岡県委託事業｜運営：特定非営利活動法人JACFA</div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section>
+  <div class="accent-blob" style="width:500px;height:500px;background:#80deea;top:0;right:-15%;"></div>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">ABOUT</div>
+    <h2 class="section-title reveal">ふくおかバーチャルさぽーとROOMとは</h2>
+    <div class="split reveal">
+      <div>
+        <ul class="feature-list">
+          <li>匿名アバターで、専用バーチャル支援空間で、ご自宅からでも安心して相談や支援につながることができる福岡県の事業です</li>
+          <li>ご自宅等からインターネットを通じてご利用いただけます</li>
+          <li>音声またはテキストチャットでコミュニケーションできます</li>
+          <li>アバターを使って匿名でご参加いただけます</li>
+        </ul>
+      </div>
+      <div><img src="assets/vsapo-chirashi.png" alt="Vさぽメインチラシ" style="width:100%;max-width:100%;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);"></div>
+    </div>
+    <div class="reveal" style="margin-top:20px;text-align:center;">
+      <a href="https://fvsapo.pref.fukuoka.lg.jp/cando/" target="_blank" style="font-size:0.85rem;color:var(--main-dark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;">公式HP「できること」ページで詳しく見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TARGET ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">TARGET</div>
+    <h2 class="section-title reveal">利用対象者</h2>
+    <div class="split reverse reveal">
+      <div>
+        <ul class="feature-list">
+          <li>福岡県内にお住まいの16歳以上の方で、仕事についていない方が対象です（全日制での就学中の方は除く）</li>
+          <li>ご利用登録申し込み時に18歳未満の方は保護者の同意が必要です</li>
+        </ul>
+      </div>
+      <div><img src="assets/キャッチコピー横トップ画像2.jpg" alt="安心して利用するイメージ" style="width:100%;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);"></div>
+    </div>
+    <div class="callout reveal">
+      <p><strong>ご登録・ご利用は無料</strong>です。※PC等や通信環境は自己負担でご用意ください。<span style="display:inline-block;">Wi-Fi環境でのご利用を強くおすすめします。</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5 SERVICES ===== -->
+<section>
+  <div class="accent-blob" style="width:400px;height:400px;background:#e1bee7;bottom:10%;left:-10%;"></div>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">SUPPORT</div>
+    <h2 class="section-title reveal" id="support">支援メニュー</h2>
+    <div class="card-row col-3 support-grid">
+      <div class="card reveal delay-1"><span class="icon">🏠</span><h3>バーチャル居場所</h3><p>予約不要で自由に過ごせる空間<br><small style="color:var(--main-dark);">毎週水曜10:30〜「アバターdeゆるりタイム」も開催中</small></p></div>
+      <div class="card reveal delay-2"><span class="icon">👥</span><h3>バーチャル交流会</h3><p>座談会やクイズ大会など、楽しいテーマで定期開催。音声でもチャットでも参加OK（原則予約制）</p></div>
+      <div class="card reveal delay-3"><span class="icon">📚</span><h3>スキルアッププログラム</h3><p>ビジネスマナーなど就労に役立つ知識をアバターで学べるプログラムです。Google Meet/Zoom等でのオンライン開催となる場合もあります</p></div>
+    </div>
+    <div class="card-row col-2 support-grid" style="margin-top:16px;">
+      <div class="card reveal delay-4"><span class="icon">💼</span><h3>バーチャル就労体験<br><small style="font-weight:400;color:var(--gray);">（ジョブトレーニング）</small></h3><p>オフィスやカフェなどの専用空間で接客練習や仕事のやりとりを体験できます</p></div>
+      <div class="card reveal delay-5"><span class="icon">💬</span><h3>アバター個別相談</h3><p>相談員もアバターとなり、音声やテキストチャットで個別相談ができます（完全予約制）</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPS ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">APPLICATION</div>
+    <h2 class="section-title reveal">使用するアプリについて</h2>
+    <div class="split reveal">
+      <div><img src="assets/⑧（チラシ用）アバター個別相談【SL】.jpg" alt="アバター個別相談 SecondLife" style="width:100%;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);"></div>
+      <div class="app-box" style="margin-bottom:16px;"><h3>SecondLife版</h3><div><span class="tag">PC専用</span><span class="tag">Windows</span><span class="tag">Mac</span></div><ul><li><a href="#support" style="color:inherit;text-decoration:underline;text-decoration-color:var(--main);text-underline-offset:3px;">全ての支援メニュー</a>に対応</li><li>3D空間で自由に移動</li><li>空も飛べるメタバース空間</li><li>音声でもチャットでもOK</li></ul></div>
+    </div>
+    <div class="split reveal" style="margin-top:24px;">
+      <div><img src="assets/①（チラシ用）FukuokaVsapoアプリ.png" alt="FukuokaVsapoアプリ" style="width:100%;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);"></div>
+      <div class="app-box"><h3>FukuokaVsapo版</h3><div><span class="tag">Windows</span><span class="tag">Mac</span><span class="tag">Android</span></div><ul><li>アバター個別相談専用<br>（1〜3名対応）</li><li>表情連動型アバター</li><li>音声でもチャットでもOK</li><li class="app-ng">iPhone（iOS）は非対応です</li></ul></div>
+    </div>
+    <div class="callout reveal" style="margin-top:20px;"><p>どちらを選ぶか迷ったら、まずは<strong>SecondLife版</strong>がおすすめです。<a href="#support" style="color:#0077b6;">すべての支援メニュー</a>に対応しています。</p></div>
+  </div>
+</section>
+
+<!-- ===== REGISTRATION (Wizard) ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">REGISTRATION</div>
+    <h2 class="section-title reveal">利用登録について</h2>
+    <!-- 登録手順を先に -->
+    <div class="flow-vertical reveal" style="margin-bottom:32px;">
+      <div class="flow-item"><div class="flow-num" style="background:linear-gradient(135deg,var(--main),var(--main-dark));">1</div><div class="flow-text"><h3>公式HPから申込み</h3><p>利用登録フォームに必要事項を入力（約5分）</p></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-item"><div class="flow-num">2</div><div class="flow-text"><h3>登録完了メールが届く</h3><p>3運営日以内（年末年始・土日祝日除く）でメールが届きます</p></div></div>
+      <div class="flow-line"></div>
+      <div class="flow-item"><div class="flow-num goal">3</div><div class="flow-text"><h3>居場所・交流会はこれだけでOK！</h3><p>他の支援メニューには追加の登録が必要です（下のウィザードで確認できます）</p></div></div>
+    </div>
+    <!-- 診断ウィザード -->
+    <div class="wizard-label reveal">気になる支援メニューをタップしてください</div>
+    <div class="wizard-grid reveal">
+      <div class="wizard-btn" onclick="toggleWizard(this, 'ibasho')"><span class="wz-icon">🏠</span><span class="wz-name">バーチャル<br>居場所</span></div>
+      <div class="wizard-btn" onclick="toggleWizard(this, 'koryu')"><span class="wz-icon">👥</span><span class="wz-name">バーチャル<br>交流会</span></div>
+      <div class="wizard-btn" onclick="toggleWizard(this, 'skill')"><span class="wz-icon">📚</span><span class="wz-name">スキルアップ<br>プログラム</span></div>
+      <div class="wizard-btn" onclick="toggleWizard(this, 'shuro')"><span class="wz-icon">💼</span><span class="wz-name">バーチャル<br>就労体験</span></div>
+      <div class="wizard-btn" onclick="toggleWizard(this, 'soudan')"><span class="wz-icon">💬</span><span class="wz-name">アバター<br>個別相談</span></div>
+    </div>
+    <div class="wizard-result reveal" id="wizardResult">
+      <div class="result-text">上の支援メニューを選ぶと、必要な登録が表示されます</div>
+    </div>
+    <!-- 公式HP登録フォーム参考画像 -->
+    <div class="reveal" style="margin-bottom:24px;text-align:center;">
+      <p style="font-size:0.78rem;color:var(--gray);margin-bottom:10px;">▼ 公式HP 利用登録フォーム</p>
+      <img src="ss_fvsapo_register.png" alt="公式HP利用登録フォーム" style="width:100%;max-width:600px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.06);">
+    </div>
+    <!-- 提案9: 安心メッセージ -->
+    <div class="reg-reassure reveal">
+      <p>申込みは<strong>オンラインで約5分</strong>。<br>登録完了まで通常<strong>2〜3日</strong><span style="display:inline-block;">（土日祝・年末年始除く）</span>です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FLOW ===== -->
+<section>
+  <div class="accent-blob" style="width:450px;height:450px;background:#80deea;top:20%;right:-12%;"></div>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">FLOW</div>
+    <h2 class="section-title reveal">利用までの流れ</h2>
+    <div class="flow-vertical">
+      <div class="flow-item reveal"><div class="flow-num" style="background:linear-gradient(135deg,#e53e3e,#c53030);">1</div><div class="flow-text"><h3>導入セミナー</h3><p>本ページの内容をご覧ください</p></div></div>
+      <div class="flow-line reveal"></div>
+      <div class="flow-item reveal delay-1"><div class="flow-num">2</div><div class="flow-text"><h3>利用登録</h3><p>公式HPからお申し込み</p></div></div>
+      <div class="flow-line reveal"></div>
+      <div class="flow-item reveal delay-2"><div class="flow-num">3</div><div class="flow-text"><h3>アプリ導入</h3><p>SecondLife版またはFukuokaVsapo版をDL＆インストール</p></div></div>
+      <div class="flow-line reveal"></div>
+      <div class="flow-item reveal delay-3"><div class="flow-num goal">4</div><div class="flow-text"><h3>Vさぽルームへようこそ！</h3><p>居場所は予約不要。プログラムは公式HPからお申込み</p></div></div>
+    </div>
+    <div class="callout reveal" style="margin-top:32px;">
+      <p>※導入セミナーと利用登録は<strong>順番が逆でもOK</strong>です。<br>個別の質問は毎月オンライン開催の<strong>導入セミナー質問会</strong>へ。公式HPよりお申し込みください。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RULES ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">RULES</div>
+    <h2 class="section-title reveal">ご利用に際して必ずお守りください</h2>
+    <div class="rules-box reveal-scale">
+      <h3>利用時間</h3>
+      <ul>
+        <li>支援対象となるご利用は<strong>平日 10:00〜17:00</strong>（年末年始・土日祝日を除く）</li>
+        <li>SecondLife版のバーチャル居場所は上記時間外も入室可能ですが、スタッフアバターは常駐していません</li>
+      </ul>
+      <h3>基本ルール</h3>
+      <ul>
+        <li>プライバシーやペースに配慮した利用をお願いします</li>
+        <li>スタッフの指示に従ってください</li>
+        <li>利用を中断・中止する場合があります</li>
+      </ul>
+      <h3>禁止事項</h3>
+      <ul>
+        <li>勧誘・販売・誹謗中傷・個人情報漏洩等</li>
+        <li>録音・撮影・他人のアバター名の記録</li>
+        <li>不快感を与えるアバターの容姿や表示名</li>
+        <li>無断での未登録者の入室</li>
+        <li>空間URLやID等の公表</li>
+      </ul>
+      <h3>プライバシー保護</h3>
+      <ul>
+        <li>相談室には遮音機能があり、相談内容は外部に漏れません</li>
+        <li>利用中はアバター名のみ表示され、本名は他の利用者に公開されません</li>
+      </ul>
+      <h3>困ったときは</h3>
+      <ul>
+        <li>利用中に不快なことがあれば、スタッフにお気軽にご相談ください</li>
+        <li>お問い合わせ：080-8182-9611（平日10:00〜17:00）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SPECS ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">SPEC</div>
+    <h2 class="section-title reveal">端末の推奨スペック</h2>
+    <div class="callout reveal" style="margin-bottom:20px;">
+      <p><strong>スペックの確認方法：</strong>Windows → 設定 → システム → バージョン情報 ／ Mac → 左上のリンゴマーク → 「このMacについて」<br>
+      <small style="color:var(--gray);">分からない場合はお気軽にお問い合わせください</small></p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-box reveal-left">
+        <h3>SecondLife版（PC専用）</h3>
+        <ul class="spec-list">
+          <li><span>OS</span><span>Windows 10〜 / macOS 12〜</span></li>
+          <li><span>CPU</span><span>SSE2対応 2コア以上</span></li>
+          <li><span>メモリ</span><span>8GB以上（推奨16GB）</span></li>
+          <li><span>GPU</span><span>VRAM 4GB以上・OpenGL 3.2</span></li>
+          <li><span>画面</span><span>1024×768以上</span></li>
+          <li><span>通信</span><span>ブロードバンド</span></li>
+        </ul>
+      </div>
+      <div class="spec-box reveal-right">
+        <h3>FukuokaVsapo版</h3>
+        <ul class="spec-list">
+          <li><span>Windows</span><span>10以降</span></li>
+          <li><span>Mac</span><span>Monterey 12.1〜</span></li>
+          <li><span>Android</span><span>11〜（2020年以降発売のミドルスペック以上）</span></li>
+          <li><span>CPU</span><span>Core i3 / Ryzen 5以上</span></li>
+          <li><span>メモリ</span><span>4GB以上</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SL SETUP ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">SETUP — SECONDLIFE</div>
+    <h2 class="section-title reveal">SecondLife版 セットアップ</h2>
+    <div class="reveal">
+      <div class="step-list">
+        <div class="step-item"><div><h3>サイトにアクセス</h3><p>SecondLife公式サイトを開き「<strong>Join now</strong>」をクリック。サイトは英語ですがそのまま進めてOKです。</p><img src="ss_sl_download.png" alt="SecondLifeダウンロードページ" style="width:100%;border-radius:12px;margin-top:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1);"></div></div>
+        <div class="step-item"><div><h3>ユーザー登録</h3><p>ユーザー名・パスワード・メール・生年月日等を入力。「Create an account」で登録完了。</p><img src="ss_sl_join.png" alt="SecondLifeサインアップ画面" style="width:100%;border-radius:12px;margin-top:10px;box-shadow:0 4px 16px rgba(0,0,0,0.1);"></div></div>
+        <div class="step-item"><div><h3>ダウンロード＆インストール</h3><p>アカウント作成後、ビューアーをDL・インストールします（約200MB）。</p></div></div>
+        <div class="step-item"><div><h3>プランについて</h3><p>アカウントは無料の「<strong style="color:#e53e3e;">Basic</strong>」で十分です。有料プランへのアップグレードや<strong style="color:#e53e3e;">クレジットカードの登録は不要</strong>です。</p></div></div>
+        <div class="step-item"><div><h3>日本語に設定</h3><p>ビューアー起動後、上部メニュー「<strong>Me</strong>」→「<strong>Preferences</strong>」→「<strong>General</strong>」タブ→「<strong>Language</strong>」を「日本語」に変更→ビューアーを再起動すると日本語になります。</p></div></div>
+      </div>
+    </div>
+    <div class="video-label reveal">日本語セットアップの動画</div>
+    <div class="video-box reveal">
+      <video muted loop playsinline controls style="width:100%;display:block;border-radius:20px;">
+        <source src="videos/sl_setup_japanese.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="callout reveal" style="margin-top:20px;"><p><strong>入室にはご利用登録が必要です。</strong>ふくおかVさぽルームの住所にあたるURLは利用登録完了メールに記載されています。※自動返信メールには未記載。</p></div>
+  </div>
+</section>
+
+<!-- ===== SL OPS ===== -->
+<section>
+  <div class="accent-blob" style="width:400px;height:400px;background:#fff9c4;top:10%;left:-8%;"></div>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">OPERATION — SECONDLIFE</div>
+    <h2 class="section-title reveal">SecondLife版 基本操作</h2>
+    <div class="reveal">
+
+      <div class="op-theater" id="opTheater">
+        <div class="op-theater-main">
+          <!-- LEFT: video/animation stage -->
+          <div class="op-theater-stage" id="opStage">
+            <div class="glitch-line" id="glitchLine"></div>
+            <div class="op-scene active" data-op="0"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_walk_forward.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="1"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_walk_back.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="2"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_turn_left.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="3"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_turn_right.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="4"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_fly_up.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="5"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_curve_right.mp4" type="video/mp4"></video></div>
+            <div class="op-scene" data-op="6"><video muted loop playsinline style="width:100%;height:100%;object-fit:cover;"><source src="videos/sl_curve_left.mp4" type="video/mp4"></video></div>
+          </div>
+
+          <!-- RIGHT: info panel -->
+          <div class="op-theater-info" id="opInfo">
+            <div class="info-content active" data-op="0">
+              <div class="op-info-badge">MOVE</div>
+              <div class="op-info-title">前進</div>
+              <div class="op-info-desc">↑キー（またはWキー）でまっすぐ前に歩きます。<br>ダブルタップで走れます。</div>
+              <div class="op-info-keys"><div class="key">↑</div><div class="key">W</div></div>
+              <div class="op-info-hint">基本の移動。まずはこれから覚えましょう</div>
+            </div>
+            <div class="info-content" data-op="1">
+              <div class="op-info-badge">MOVE</div>
+              <div class="op-info-title">後退</div>
+              <div class="op-info-desc">↓キー（またはSキー）で後ろに下がります。<br>向きはそのまま、バックで移動します。</div>
+              <div class="op-info-keys"><div class="key">↓</div><div class="key">S</div></div>
+              <div class="op-info-hint">壁にぶつかっても大丈夫。後ろに下がれます</div>
+            </div>
+            <div class="info-content" data-op="2">
+              <div class="op-info-badge">MOVE</div>
+              <div class="op-info-title">左に旋回</div>
+              <div class="op-info-desc">←キー（またはAキー）でその場で左に回転します。<br>向きたい方向に体を向けてから前進しましょう。</div>
+              <div class="op-info-keys"><div class="key">←</div><div class="key">A</div></div>
+              <div class="op-info-hint">止まったまま方向転換できます</div>
+            </div>
+            <div class="info-content" data-op="3">
+              <div class="op-info-badge">MOVE</div>
+              <div class="op-info-title">右に旋回</div>
+              <div class="op-info-desc">→キー（またはDキー）でその場で右に回転します。<br>向きたい方向に体を向けてから前進しましょう。</div>
+              <div class="op-info-keys"><div class="key">→</div><div class="key">D</div></div>
+              <div class="op-info-hint">止まったまま方向転換できます</div>
+            </div>
+            <div class="info-content" data-op="4">
+              <div class="op-info-badge">FLY</div>
+              <div class="op-info-title">上昇（飛行）</div>
+              <div class="op-info-desc">Eキーでジャンプ。<br>ホームキー（またはPageUp）長押しで飛行開始！<br>飛行中はEキーで上昇、Cキーで下降。</div>
+              <div class="op-info-keys"><div class="key">E</div><div class="key">Home</div><div class="key">PgUp</div><div class="key">C</div></div>
+              <div class="op-info-hint">空を飛ぶと移動が速くなります</div>
+            </div>
+            <div class="info-content" data-op="5">
+              <div class="op-info-badge">TECHNIQUE</div>
+              <div class="op-info-title">歩きながら右カーブ</div>
+              <div class="op-info-desc">Wキーを押しながら→キーで、<br>歩きながら右にカーブできます。<br>スムーズな移動のコツです！</div>
+              <div class="op-info-keys"><div class="key">W</div><span style="color:rgba(255,255,255,0.4);font-size:0.8rem;">+</span><div class="key">→</div></div>
+              <div class="op-info-hint">慣れると自由自在に歩き回れます</div>
+            </div>
+            <div class="info-content" data-op="6">
+              <div class="op-info-badge">TECHNIQUE</div>
+              <div class="op-info-title">歩きながら左カーブ</div>
+              <div class="op-info-desc">Wキーを押しながら←キーで、<br>歩きながら左にカーブできます。<br>右カーブと合わせて自在に移動！</div>
+              <div class="op-info-keys"><div class="key">W</div><span style="color:rgba(255,255,255,0.4);font-size:0.8rem;">+</span><div class="key">←</div></div>
+              <div class="op-info-hint">W+左右を使いこなせば上級者！</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM: tab bar -->
+        <div class="op-theater-tabs" id="opTabs">
+          <div class="op-tab active" data-op="0" onclick="switchOp(0)"><span class="tab-icon">⬆️</span><span class="tab-label">前進</span></div>
+          <div class="op-tab" data-op="1" onclick="switchOp(1)"><span class="tab-icon">⬇️</span><span class="tab-label">後退</span></div>
+          <div class="op-tab" data-op="2" onclick="switchOp(2)"><span class="tab-icon">↩️</span><span class="tab-label">左旋回</span></div>
+          <div class="op-tab" data-op="3" onclick="switchOp(3)"><span class="tab-icon">↪️</span><span class="tab-label">右旋回</span></div>
+          <div class="op-tab" data-op="4" onclick="switchOp(4)"><span class="tab-icon">🕊️</span><span class="tab-label">飛行</span></div>
+          <div class="op-tab" data-op="5" onclick="switchOp(5)"><span class="tab-icon">➡️</span><span class="tab-label">右カーブ</span></div>
+          <div class="op-tab" data-op="6" onclick="switchOp(6)"><span class="tab-icon">⬅️</span><span class="tab-label">左カーブ</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FV SETUP ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">SETUP — FUKUOKAVSAPO</div>
+    <h2 class="section-title reveal">FukuokaVsapo版 セットアップ</h2>
+
+    <div class="callout reveal" style="margin-bottom:24px;">
+      <p>アプリのインストールおよび利用は<strong>無料</strong>です。事前にアバター個別相談の<strong>予約</strong>が必要です。</p>
+    </div>
+
+    <!-- Windows -->
+    <div class="reveal">
+      <h3 style="font-size:0.95rem;color:var(--main-dark);margin-bottom:14px;">💻 Windows</h3>
+      <div class="step-list">
+        <div class="step-item"><div><h3>インストーラーをDL</h3><p>公式HPの「FukuokaVsapoアプリのダウンロード」から「Windows」をクリック</p></div></div>
+        <div class="step-item"><div><h3>インストーラーを実行</h3><p>ダウンロードした FukuokaVsapo_latest.exe を実行</p></div></div>
+        <div class="step-item"><div><h3>セキュリティ警告が出たら</h3><p>「WindowsによってPCが保護されました」→「<strong>詳細情報</strong>」→「<strong>実行</strong>」をクリック</p></div></div>
+        <div class="step-item"><div><h3>インストール</h3><p>インストーラーの指示に従って「次へ」→「インストール」→ 完了</p></div></div>
+      </div>
+    </div>
+
+    <!-- Mac -->
+    <div class="reveal" style="margin-top:28px;">
+      <h3 style="font-size:0.95rem;color:var(--main-dark);margin-bottom:14px;">🍎 Mac</h3>
+      <div class="step-list">
+        <div class="step-item"><div><h3>インストーラーをDL</h3><p>公式HPから「Mac」をクリック（.pkgファイル、約484MB）</p></div></div>
+        <div class="step-item"><div><h3>インストーラーを実行</h3><p>ダウンロードした .pkg を<strong>右クリック</strong>（またはControl+クリック）→「<strong>開く</strong>」を選択</p></div></div>
+        <div class="step-item"><div><h3>インストール</h3><p>インストーラーの指示に従って「続ける」→ パスワード入力 →「ソフトウェアをインストール」→ 完了</p></div></div>
+      </div>
+    </div>
+
+    <!-- Android -->
+    <div class="reveal" style="margin-top:28px;">
+      <h3 style="font-size:0.95rem;color:var(--main-dark);margin-bottom:14px;">📱 Android</h3>
+      <div class="step-list">
+        <div class="step-item"><div><h3>Filesアプリを準備</h3><p>Google「Files」アプリが必要です。お持ちでない方はPlayストアからインストール</p></div></div>
+        <div class="step-item"><div><h3>APKをDL</h3><p>公式HPから「Android」をクリック。ダウンロードが始まります（約665MB）</p></div></div>
+        <div class="step-item"><div><h3>APKを実行</h3><p>Filesアプリ→「ダウンロード」フォルダ→ FukuokaVsapo_latest.apk をタップ</p></div></div>
+        <div class="step-item"><div><h3>提供元アプリを許可</h3><p>セキュリティ画面が出たら「<strong>設定</strong>」→「この提供元のアプリを許可」を<strong>ON</strong>→ 戻る</p></div></div>
+        <div class="step-item"><div><h3>インストール</h3><p>「インストール」をタップ→ 完了</p></div></div>
+      </div>
+    </div>
+
+    <!-- iPhone -->
+    <div class="reveal" style="margin-top:28px;">
+      <div class="card" style="border-left:3px solid #e53e3e;"><h3>🍏 iPhone（iOS）</h3><p style="color:#e53e3e;font-weight:600;">現在 非対応です。PC または Android をご利用ください。</p></div>
+    </div>
+
+    <!-- ログインと操作 -->
+    <h3 class="reveal" style="margin-top:36px;font-size:1.1rem;color:var(--main-dark);">ログインから相談室へ</h3>
+    <div class="reveal">
+      <div class="step-list">
+        <div class="step-item"><div><h3>アプリを起動</h3><p>インストールしたFukuokaVsapoを起動します</p></div></div>
+        <div class="step-item"><div><h3>ログイン</h3><p>予約時に届いたメールの<strong>メールアドレス</strong>と<strong>パスワード</strong>を入力してログイン<br><small style="color:var(--gray);">※予約の10分前からログイン可能です</small></p></div></div>
+        <div class="step-item"><div><h3>アバター選択</h3><p>用意されたアバターから好きなものを選択。あなたの表情や動きがアバターに連動します</p></div></div>
+        <div class="step-item"><div><h3>相談室で相談</h3><p>音声通話やテキストチャットで相談できます。予約者と相談員のみ入室可能なため、プライバシーが守られます<br><small style="color:var(--gray);">※相談員が入室してからご入室ください。相談員より先に入室することはできません</small></p></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section>
+  <div class="container">
+    <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal">よくあるご質問</h2>
+    <div class="card-row col-2">
+      <div class="card reveal delay-1"><h3>Q. 費用はかかりますか？</h3><p>ご登録・ご利用・ご参加はすべて<strong>無料</strong>です。ただしPC等の機器・通信環境は自己負担となります。<span style="display:inline-block;">Wi-Fi環境でのご利用をおすすめします。</span></p></div>
+      <div class="card reveal delay-2"><h3>Q. 本名は公開されますか？</h3><p>利用登録は本名ですが、アバター名はニックネームでOK。利用中はアバター名のみ表示され、本名は他の利用者に非公開です。</p></div>
+      <div class="card reveal delay-1"><h3>Q. スマホでも使えますか？</h3><p>FukuokaVsapo版は2020年以降発売のミドルスペック以上のAndroidスマホに対応。SecondLife版はPC専用です。<strong>iPhone（iOS）は非対応</strong>です。</p></div>
+      <div class="card reveal delay-2"><h3>Q. 利用時間は？</h3><p>支援対象となるご利用は<strong>平日10:00〜17:00</strong>（年末年始・土日祝日除く）。SecondLife版のバーチャル居場所は時間外も入室可能ですが、スタッフアバターは常駐していません。</p></div>
+      <div class="card reveal delay-1"><h3>Q. 初対面の人とうまく話せるか不安です</h3><p>会話は必須ではありません。チャットのみでの参加もOK。経験豊富なスタッフがサポートしますので、無理なくご参加いただけます。</p></div>
+      <div class="card reveal delay-2"><h3>Q. パソコンが苦手でも大丈夫？</h3><p>特別な知識は不要です。キーボードの矢印キーとマウスで操作できます。操作方法の動画もご用意しています。</p></div>
+      <div class="card reveal delay-1"><h3>Q. 利用をやめたい時は？</h3><p>ふくおかVさぽルームに本人（または保護者）からご連絡ください。費用は一切かかりません。</p></div>
+      <div class="card reveal delay-2"><h3>Q. 質問がある場合は？</h3><p>毎月オンライン（Google Meet）で<strong>導入セミナー質問会</strong>を開催しています。公式HPからお申込みください。</p></div>
+    </div>
+    <div class="callout reveal" style="margin-top:24px;">
+      <p>その他のご質問は<strong><a href="https://fvsapo.pref.fukuoka.lg.jp/faq/" target="_blank" style="color:#0077b6;">公式HP「よくある質問」ページ</a></strong>をご覧ください（全20項目以上のQ&Aを掲載）。</p>
+    </div>
+    <div class="reveal" style="margin-top:16px;text-align:center;">
+      <a href="https://fvsapo.pref.fukuoka.lg.jp/faq/" target="_blank" style="text-decoration:none;">
+        <img src="ss_fvsapo_faq.png" alt="公式HPよくある質問ページ" style="width:100%;max-width:600px;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.06);transition:transform 0.3s;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
+        <p style="font-size:0.72rem;color:var(--main-dark);margin-top:8px;">公式HP「よくある質問」を見る →</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
+  <div class="container">
+    <img src="assets/logo.png" alt="ふくおかバーチャルさぽーとROOM" class="hero-logo reveal">
+    <h2 class="reveal delay-1">まずは利用登録から<br>あなたの一歩を踏み出しましょう</h2>
+    <p class="reveal delay-2">最新情報・お申込みは公式HPから</p>
+    <p class="reveal delay-3" style="font-size:0.85rem;">
+      お問い合わせ：<strong>080-8182-9611</strong>（平日10:00〜17:00）<br>
+      <span style="color:#94a3b8;font-size:0.75rem;">ふくおかバーチャルさぽーとROOM 受付窓口</span><br>
+      <strong><a href="https://fvsapo.pref.fukuoka.lg.jp/inquiry/" target="_blank" style="color:var(--main-dark);font-size:0.78rem;">Webフォームからのお問い合わせはこちら</a></strong>
+    </p>
+    <a class="cta-btn reveal delay-4" href="https://fvsapo.pref.fukuoka.lg.jp/" target="_blank">公式HPはこちら →</a>
+  </div>
+</section>
+
+<footer>
+  メタバース活用就労支援事業｜福岡県委託事業｜運営：特定非営利活動法人JACFA<br>
+  Copyright © Fukuoka Prefecture. All rights reserved.
+</footer>
+
+<script>
+// ===== SCROLL REVEAL (Intersection Observer) =====
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+
+// ===== PARALLAX =====
+const parallaxEls = document.querySelectorAll('[data-parallax]');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  parallaxEls.forEach(el => {
+    const speed = parseFloat(el.dataset.parallax);
+    el.style.transform = `translateY(${scrollY * speed}px)`;
+  });
+}, { passive: true });
+
+// ===== RIPPLE SYSTEM =====
+const rCanvas = document.getElementById('ripples');
+const rCtx = rCanvas.getContext('2d');
+let ripples = [];
+let audioContext, analyser, dataArray, source, audioConnected = false;
+
+function resizeCanvas() { rCanvas.width = window.innerWidth; rCanvas.height = window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Ripple {
+  constructor(x, y, intensity) {
+    this.x = x; this.y = y; this.radius = 0;
+    this.maxRadius = 150 + intensity * 200;
+    this.opacity = 0.13 + intensity * 0.08;
+    this.speed = 0.35 + intensity * 0.45;
+    this.hue = [195, 185, 200][Math.floor(Math.random() * 3)];
+    this.lineWidth = 1.2 + intensity;
+  }
+  update() { this.radius += this.speed; this.opacity *= 0.997; }
+  draw() {
+    if (this.opacity < 0.005) return;
+    for (let r = 0; r < 3; r++) {
+      const rr = this.radius - r * 12; if (rr < 0) continue;
+      const op = this.opacity * (1 - r * 0.3);
+      const lw = this.lineWidth * (1 - rr / this.maxRadius) * (1 - r * 0.2);
+      if (lw < 0.1) continue;
+      rCtx.beginPath(); rCtx.arc(this.x, this.y, rr, 0, Math.PI * 2);
+      rCtx.strokeStyle = `hsla(${this.hue},55%,65%,${op})`; rCtx.lineWidth = lw; rCtx.stroke();
+    }
+    if (this.radius < 25) {
+      rCtx.beginPath(); rCtx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+      rCtx.fillStyle = `hsla(${this.hue},65%,75%,${this.opacity*(1-this.radius/25)*0.4})`; rCtx.fill();
+    }
+  }
+  isDead() { return this.radius > this.maxRadius || this.opacity < 0.005; }
+}
+
+function connectAudio() {
+  if (audioConnected) return;
+  const bgm = document.getElementById('bgm');
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  analyser = audioContext.createAnalyser();
+  analyser.fftSize = 512; analyser.smoothingTimeConstant = 0.8;
+  source = audioContext.createMediaElementSource(bgm);
+  source.connect(analyser); analyser.connect(audioContext.destination);
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  audioConnected = true;
+}
+
+let prevEnergy = 0, beatCooldown = 0;
+function animateRipples() {
+  rCtx.clearRect(0, 0, rCanvas.width, rCanvas.height);
+  if (audioConnected && analyser) {
+    analyser.getByteFrequencyData(dataArray);
+    let bass = 0; for (let i = 1; i < 6; i++) bass += dataArray[i]; bass /= (5 * 255);
+    let mid = 0; for (let i = 10; i < 30; i++) mid += dataArray[i]; mid /= (20 * 255);
+    const energy = bass * 0.8 + mid * 0.2;
+    const delta = energy - prevEnergy;
+    prevEnergy = prevEnergy * 0.9 + energy * 0.1;
+    beatCooldown = Math.max(0, beatCooldown - 1);
+    if (delta > 0.12 && energy > 0.3 && beatCooldown === 0 && ripples.length < 3) {
+      beatCooldown = 40;
+      ripples.push(new Ripple(rCanvas.width*0.2+Math.random()*rCanvas.width*0.6, rCanvas.height*0.2+Math.random()*rCanvas.height*0.6, Math.min(energy*1.5,1)));
+    }
+  } else if (ripples.length === 0 && Math.random() < 0.002) {
+    ripples.push(new Ripple(Math.random()*rCanvas.width, Math.random()*rCanvas.height, 0.08));
+  }
+  ripples.forEach(r => { r.update(); r.draw(); });
+  ripples = ripples.filter(r => !r.isDead());
+  requestAnimationFrame(animateRipples);
+}
+animateRipples();
+
+// ===== FLOATING CTA (show after scroll, hide near footer) =====
+var floatCta = document.getElementById('floatCta');
+var scrollHint = document.querySelector('.scroll-hint');
+window.addEventListener('scroll', function() {
+  var scrollY = window.scrollY;
+  var showAfter = window.innerHeight * 0.5;
+  var docHeight = document.documentElement.scrollHeight;
+  var hideNearBottom = docHeight - window.innerHeight * 2;
+  if (scrollY > showAfter && scrollY < hideNearBottom) {
+    floatCta.classList.add('visible');
+  } else {
+    floatCta.classList.remove('visible');
+  }
+}, { passive: true });
+
+// ===== PAGE COUNTER =====
+const allSections = document.querySelectorAll('section');
+const pageCounter = document.getElementById('pageCounter');
+const totalPages = allSections.length;
+const sectionObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      const idx = Array.from(allSections).indexOf(entry.target) + 1;
+      pageCounter.textContent = idx + ' / ' + totalPages;
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-10% 0px -50% 0px' });
+allSections.forEach(function(s) { sectionObs.observe(s); });
+
+// ===== BGM =====
+let bgmPlaying = false;
+const bgm = document.getElementById('bgm');
+function toggleBGM() {
+  const btn = document.getElementById('bgmBtn'), icon = btn.querySelector('.btn-icon');
+  connectAudio();
+  if (bgm.paused) {
+    bgm.volume = 0.25;
+    bgm.play();
+    icon.textContent = '🔊'; btn.classList.add('playing'); bgmPlaying = true;
+  } else {
+    bgm.pause();
+    icon.textContent = '🔇'; btn.classList.remove('playing'); bgmPlaying = false;
+  }
+}
+
+// ===== CLICK ANYWHERE TO TOGGLE AUTO SCROLL =====
+document.addEventListener('click', function(e) {
+  if (e.target.closest('#bgmBtn') || e.target.closest('#autoScrollBtn') || e.target.closest('#nightBtn') || e.target.closest('.wizard-btn') || e.target.closest('.wizard-grid') || e.target.closest('.card') || e.target.closest('.app-box') || e.target.closest('.float-cta') || e.target.closest('a')) return;
+  toggleAutoScroll();
+});
+
+// ===== AUTO SCROLL =====
+let autoScrolling = false;
+let autoScrollRAF = null;
+const SCROLL_SPEED = 0.6;
+
+function toggleAutoScroll() {
+  const btn = document.getElementById('autoScrollBtn'), icon = btn.querySelector('.btn-icon');
+  if (autoScrolling) {
+    autoScrolling = false;
+    icon.textContent = '▶';
+    btn.classList.remove('playing');
+    if (autoScrollRAF) cancelAnimationFrame(autoScrollRAF);
+  } else {
+    autoScrolling = true;
+    icon.textContent = '⏸';
+    btn.classList.add('playing');
+    doAutoScroll();
+  }
+}
+
+function doAutoScroll() {
+  if (!autoScrolling) return;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  if (window.scrollY >= maxScroll) {
+    toggleAutoScroll();
+    return;
+  }
+  window.scrollBy(0, SCROLL_SPEED);
+  autoScrollRAF = requestAnimationFrame(doAutoScroll);
+}
+
+['wheel', 'touchstart'].forEach(evt => {
+  window.addEventListener(evt, () => {
+    if (autoScrolling) toggleAutoScroll();
+  }, { passive: true });
+});
+
+// ===== REGISTRATION WIZARD =====
+var wizardSelected = {};
+var wizardReqs = {
+  ibasho: { name: 'バーチャル居場所', regs: ['Vさぽ登録'] },
+  koryu:  { name: 'バーチャル交流会', regs: ['Vさぽ登録'] },
+  skill:  { name: 'スキルアッププログラム', regs: ['Vさぽ登録', '福岡県内のサポステ登録'] },
+  shuro:  { name: 'バーチャル就労体験', regs: ['Vさぽ登録', '福岡県内のサポステ登録'] },
+  soudan: { name: 'アバター個別相談', regs: ['Vさぽ登録', '対象機関の登録'] }
+};
+function toggleWizard(el, key) {
+  el.classList.toggle('selected');
+  if (wizardSelected[key]) { delete wizardSelected[key]; } else { wizardSelected[key] = true; }
+  updateWizardResult();
+}
+function updateWizardResult() {
+  var box = document.getElementById('wizardResult');
+  var keys = Object.keys(wizardSelected);
+  if (keys.length === 0) {
+    box.classList.remove('has-result');
+    box.innerHTML = '<div class="result-text">上の支援メニューを選ぶと、必要な登録が表示されます</div>';
+    return;
+  }
+  var allRegs = {};
+  keys.forEach(function(k) {
+    wizardReqs[k].regs.forEach(function(r) { allRegs[r] = true; });
+  });
+  var regColors = {
+    'Vさぽ登録': 't1',
+    '福岡県内のサポステ登録': 't2',
+    '対象機関の登録': 't3'
+  };
+  var regOrder = ['Vさぽ登録','福岡県内のサポステ登録','対象機関の登録'];
+  var tags = regOrder.filter(function(r){ return allRegs[r]; }).map(function(r) {
+    return '<span class="result-tag ' + regColors[r] + '">' + r + '</span>';
+  }).join('');
+  var names = keys.map(function(k){ return wizardReqs[k].name; }).join('、');
+  var extraLinks = '';
+  if (allRegs['福岡県内のサポステ登録']) {
+    extraLinks += '<div style="margin-top:12px;font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.8;">' +
+      '福岡県内の若者サポートステーション：' +
+      '<a href="https://saposute.com/" target="_blank" style="color:#c8a0ff;">福岡</a>・' +
+      '<a href="https://kitakyushu-saposute.com/" target="_blank" style="color:#c8a0ff;">北九州</a>・' +
+      '<a href="https://chikugo-saposute.com/" target="_blank" style="color:#c8a0ff;">筑後</a>・' +
+      '<a href="https://chikuhou-saposute.com/" target="_blank" style="color:#c8a0ff;">筑豊</a></div>';
+  }
+  if (allRegs['対象機関の登録']) {
+    extraLinks += '<div style="margin-top:8px;font-size:0.68rem;color:rgba(255,255,255,0.55);line-height:1.8;">' +
+      '<a href="https://fvsapo.pref.fukuoka.lg.jp/related/#support-organization" target="_blank" style="color:#fbbf24;">対象支援機関の一覧はこちら（公式HP）</a></div>';
+  }
+  box.classList.add('has-result');
+  box.innerHTML = '<div class="result-text">あなたに必要な登録</div>' +
+    '<div style="margin:10px 0;">' + tags + '</div>' +
+    '<div class="result-detail">選択中：' + names + '</div>' + extraLinks;
+}
+
+// ===== OPERATION THEATER =====
+// Auto-play first video when theater comes into view
+var theaterObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var v = document.querySelector('#opStage .op-scene.active video');
+      if (v) v.play();
+      theaterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+var theaterEl = document.getElementById('opTheater');
+if (theaterEl) theaterObserver.observe(theaterEl);
+var currentOp = 0;
+function switchOp(idx) {
+  if (idx === currentOp) return;
+  currentOp = idx;
+  // glitch line
+  var gl = document.getElementById('glitchLine');
+  gl.classList.remove('flash');
+  void gl.offsetWidth;
+  gl.classList.add('flash');
+  // scenes - pause all videos, activate new scene
+  document.querySelectorAll('#opStage .op-scene').forEach(function(s) {
+    s.classList.remove('active');
+    var v = s.querySelector('video');
+    if (v) { v.pause(); v.currentTime = 0; }
+  });
+  var target = document.querySelector('#opStage .op-scene[data-op="'+idx+'"]');
+  if (target) {
+    target.classList.add('active');
+    var v = target.querySelector('video');
+    if (v) v.play();
+  }
+  // info
+  document.querySelectorAll('#opInfo .info-content').forEach(function(s) { s.classList.remove('active'); });
+  var info = document.querySelector('#opInfo .info-content[data-op="'+idx+'"]');
+  if (info) info.classList.add('active');
+  // tabs
+  document.querySelectorAll('#opTabs .op-tab').forEach(function(s) { s.classList.remove('active'); });
+  var tab = document.querySelector('#opTabs .op-tab[data-op="'+idx+'"]');
+  if (tab) tab.classList.add('active');
+}
+
+// ===== SECTION TRACKING (GA4) =====
+(function() {
+  var sectionNames = ['HERO','ABOUT','TARGET','SUPPORT','APPLICATION','REGISTRATION','FLOW','RULES','SPEC','SL_SETUP','SL_OPS','FV_SETUP','FAQ','CTA'];
+  var tracked = {};
+  var startTime = Date.now();
+  var trackObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      var idx = Array.from(document.querySelectorAll('section')).indexOf(entry.target);
+      var name = sectionNames[idx] || ('SECTION_' + idx);
+      if (tracked[name]) return;
+      tracked[name] = true;
+      var elapsed = Math.round((Date.now() - startTime) / 1000);
+      if (typeof gtag === 'function') {
+        gtag('event', 'section_view', {
+          section_name: name,
+          section_index: idx + 1,
+          seconds_since_start: elapsed
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('section').forEach(function(s) { trackObs.observe(s); });
+
+  // Track seminar completion (reached CTA)
+  var ctaSection = document.querySelector('.cta-section');
+  if (ctaSection) {
+    var ctaObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var elapsed = Math.round((Date.now() - startTime) / 1000);
+        if (typeof gtag === 'function') {
+          gtag('event', 'seminar_completed', {
+            total_seconds: elapsed,
+            sections_viewed: Object.keys(tracked).length
+          });
+        }
+        ctaObs.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+    ctaObs.observe(ctaSection);
+  }
+
+  // Track outbound link clicks
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href^="http"]');
+    if (!link) return;
+    var url = link.href;
+    if (typeof gtag === 'function') {
+      gtag('event', 'outbound_click', { link_url: url });
+    }
+  });
+
+  // Track operation theater tab switches
+  var origSwitchOp = window.switchOp;
+  window.switchOp = function(idx) {
+    var tabNames = ['前進','後退','左旋回','右旋回','飛行','右カーブ','左カーブ'];
+    if (typeof gtag === 'function') {
+      gtag('event', 'operation_tab', { tab_name: tabNames[idx] || idx, tab_index: idx });
+    }
+    if (origSwitchOp) origSwitchOp(idx);
+  };
+
+  // Track wizard interactions
+  var origToggleWizard = window.toggleWizard;
+  window.toggleWizard = function(el, key) {
+    if (typeof gtag === 'function') {
+      gtag('event', 'wizard_select', { service: key });
+    }
+    if (origToggleWizard) origToggleWizard(el, key);
+  };
+})();
+
+// ===== NIGHT MODE =====
+function toggleNight() {
+  const html = document.documentElement;
+  const btn = document.getElementById('nightBtn');
+  if (html.getAttribute('data-theme') === 'night') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    btn.classList.remove('active');
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'night');
+    btn.textContent = '☀️';
+    btn.classList.add('active');
+    localStorage.setItem('theme', 'night');
+  }
+}
+(function() {
+  if (localStorage.getItem('theme') === 'night') {
+    var btn = document.getElementById('nightBtn');
+    btn.textContent = '☀️';
+    btn.classList.add('active');
+  }
+})();
+</script>
+</body>
+</html>
