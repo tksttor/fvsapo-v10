@@ -1190,16 +1190,20 @@ footer {
 
 <!-- ===== TOC (hamburger + dot nav) ===== -->
 <style>
-  .toc-btn { position:fixed; top:16px; right:16px; z-index:200; width:42px; height:42px; border-radius:50%; background:#fff; border:1px solid rgba(0,0,0,0.08); box-shadow:0 4px 16px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition:transform 0.2s; }
-  .toc-btn:hover { transform:scale(1.05); }
-  .toc-panel { position:fixed; top:0; right:-320px; width:300px; max-width:85vw; height:100vh; background:#fff; box-shadow:-8px 0 32px rgba(0,0,0,0.15); z-index:199; transition:right 0.35s cubic-bezier(.22,.61,.36,1); overflow-y:auto; padding:64px 8px 24px; }
+  .toc-btn { position:fixed; top:16px; right:16px; z-index:200; width:46px; height:46px; border-radius:50%; background:var(--main); color:#fff; border:none; box-shadow:0 6px 20px rgba(0,120,166,0.3); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.25rem; transition:transform 0.2s, background 0.2s; }
+  .toc-btn:hover { transform:scale(1.08); background:var(--main-dark); }
+  .toc-panel { position:fixed; top:0; right:-360px; width:340px; max-width:88vw; height:100vh; background:#fafaf7; box-shadow:-8px 0 32px rgba(0,0,0,0.18); z-index:199; transition:right 0.4s cubic-bezier(.22,.61,.36,1); overflow-y:auto; padding:24px 0 24px; }
   .toc-panel.open { right:0; }
-  .toc-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:198; opacity:0; pointer-events:none; transition:opacity 0.3s; }
+  .toc-panel-head { padding:10px 24px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:12px; }
+  .toc-panel-head .title { font-weight:900; font-size:1rem; letter-spacing:0.15em; color:var(--main-dark); }
+  .toc-panel-close { background:transparent; border:none; font-size:1.5rem; color:var(--gray); cursor:pointer; padding:4px 10px; line-height:1; }
+  .toc-panel-close:hover { color:var(--main); }
+  .toc-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:198; opacity:0; pointer-events:none; transition:opacity 0.3s; backdrop-filter:blur(2px); }
   .toc-overlay.show { opacity:1; pointer-events:auto; }
-  .toc-panel a { display:block; padding:10px 16px; color:var(--text, #1a1a2e); text-decoration:none; font-size:0.88rem; border-radius:8px; border-left:3px solid transparent; transition:all 0.2s; }
-  .toc-panel a:hover { background:#f0f0e8; border-left-color:var(--main); }
-  .toc-panel a.active { background:rgba(0,120,166,0.08); border-left-color:var(--main); font-weight:700; color:var(--main-dark); }
-  .toc-panel .toc-num { display:inline-block; width:22px; color:var(--gray); font-size:0.75rem; font-weight:500; }
+  .toc-panel a { display:flex; align-items:center; gap:14px; padding:14px 24px; color:var(--text, #1a1a2e); text-decoration:none; font-size:0.92rem; border-left:3px solid transparent; transition:all 0.2s; }
+  .toc-panel a:hover { background:rgba(0,120,166,0.06); border-left-color:var(--main); padding-left:28px; }
+  .toc-panel a.active { background:rgba(0,120,166,0.1); border-left-color:var(--main); font-weight:700; color:var(--main-dark); }
+  .toc-panel .toc-num { display:inline-block; width:26px; color:var(--main); font-size:0.78rem; font-weight:700; letter-spacing:0.05em; }
 
   .toc-dots { position:fixed; top:50%; right:12px; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:10px; }
   .toc-dot { width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.18); cursor:pointer; transition:all 0.25s; position:relative; }
@@ -1208,17 +1212,24 @@ footer {
   .toc-dot .toc-dot-label { position:absolute; right:20px; top:50%; transform:translateY(-50%); background:#1a1a2e; color:#fff; padding:4px 10px; border-radius:6px; font-size:0.72rem; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.2s; }
   .toc-dot:hover .toc-dot-label, .toc-dot.active .toc-dot-label { opacity:0; }
   .toc-dot:hover .toc-dot-label { opacity:1; }
-  [data-theme="night"] .toc-btn { background:#2a2a3e; color:#f0f0ff; border-color:rgba(255,255,255,0.08); }
+  [data-theme="night"] .toc-btn { background:var(--main-dark); color:#fff; }
   [data-theme="night"] .toc-panel { background:#1a1a2e; color:#f0f0ff; }
+  [data-theme="night"] .toc-panel-head { border-bottom-color:rgba(255,255,255,0.1); }
   [data-theme="night"] .toc-panel a { color:#f0f0ff; }
-  [data-theme="night"] .toc-panel a:hover { background:#2a2a3e; }
+  [data-theme="night"] .toc-panel a:hover { background:rgba(255,255,255,0.05); }
   [data-theme="night"] .toc-dot { background:rgba(255,255,255,0.25); }
   @media (max-width:480px) { .toc-dots { display:none; } }
 </style>
 
 <button type="button" class="toc-btn" id="tocBtn" aria-label="目次を開く">☰</button>
 <div class="toc-overlay" id="tocOverlay"></div>
-<nav class="toc-panel" id="tocPanel"></nav>
+<nav class="toc-panel" id="tocPanel">
+  <div class="toc-panel-head">
+    <span class="title">目次</span>
+    <button type="button" class="toc-panel-close" id="tocClose" aria-label="閉じる">×</button>
+  </div>
+  <div id="tocPanelList"></div>
+</nav>
 <div class="toc-dots" id="tocDots"></div>
 
 <script>
@@ -1240,16 +1251,21 @@ footer {
     { id:'sec-cta', name:'お問い合わせ' },
   ];
   const panel = document.getElementById('tocPanel');
+  const panelList = document.getElementById('tocPanelList');
   const dots = document.getElementById('tocDots');
   const btn = document.getElementById('tocBtn');
   const overlay = document.getElementById('tocOverlay');
+  const intro = document.getElementById('tocGrid');
+  const secToc = document.getElementById('sec-toc');
   sections.forEach((s, i) => {
+    // panel link
     const a = document.createElement('a');
     a.href = '#' + s.id;
     a.dataset.sid = s.id;
     a.innerHTML = `<span class="toc-num">${String(i+1).padStart(2,'0')}</span>${s.name}`;
     a.addEventListener('click', () => closePanel());
-    panel.appendChild(a);
+    panelList.appendChild(a);
+    // dot
     const d = document.createElement('div');
     d.className = 'toc-dot';
     d.dataset.sid = s.id;
@@ -1258,11 +1274,34 @@ footer {
       document.getElementById(s.id)?.scrollIntoView({ behavior:'smooth', block:'start' });
     });
     dots.appendChild(d);
+    // inline grid (目次セクション)
+    if (intro) {
+      const g = document.createElement('a');
+      g.href = '#' + s.id;
+      g.innerHTML = `<span class="n">${String(i+1).padStart(2,'0')}</span>${s.name}`;
+      intro.appendChild(g);
+    }
   });
   function openPanel() { panel.classList.add('open'); overlay.classList.add('show'); }
   function closePanel() { panel.classList.remove('open'); overlay.classList.remove('show'); }
   btn.addEventListener('click', () => panel.classList.contains('open') ? closePanel() : openPanel());
   overlay.addEventListener('click', closePanel);
+  document.getElementById('tocClose')?.addEventListener('click', closePanel);
+  // ハンバーガーボタンの表示制御：sec-toc を通り過ぎたら表示
+  if (secToc) {
+    const tocBtnObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        // sec-toc が表示中ならボタン非表示、過ぎたら表示
+        btn.classList.toggle('shown', !e.isIntersecting && window.scrollY > 200);
+      });
+    }, { rootMargin:'0px' });
+    tocBtnObserver.observe(secToc);
+    window.addEventListener('scroll', () => {
+      const r = secToc.getBoundingClientRect();
+      const passed = r.bottom < 0;
+      btn.classList.toggle('shown', passed);
+    }, { passive:true });
+  }
   // 現在位置の検出（IntersectionObserver）
   const secs = sections.map(s => document.getElementById(s.id)).filter(Boolean);
   const observer = new IntersectionObserver((entries) => {
@@ -1292,6 +1331,27 @@ footer {
     <div class="hero-org reveal delay-4">福岡県委託事業｜運営：特定非営利活動法人JACFA</div>
   </div>
   <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ===== TOC ON-PAGE ===== -->
+<style>
+  .toc-intro { padding:80px 20px 100px; max-width:840px; margin:0 auto; }
+  .toc-intro .toc-heading { text-align:center; font-size:1.2rem; letter-spacing:0.2em; color:var(--main-dark); margin-bottom:8px; font-weight:900; }
+  .toc-intro .toc-sub { text-align:center; font-size:0.82rem; color:var(--gray); margin-bottom:40px; }
+  .toc-intro .toc-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; }
+  .toc-intro .toc-grid a { display:flex; align-items:center; gap:12px; padding:14px 18px; background:#fff; border:1px solid rgba(0,0,0,0.08); border-radius:10px; color:var(--text,#1a1a2e); text-decoration:none; font-size:0.9rem; transition:all 0.25s; box-shadow:0 2px 6px rgba(0,0,0,0.03); }
+  .toc-intro .toc-grid a:hover { transform:translateY(-3px); border-color:var(--main); box-shadow:0 8px 20px rgba(0,120,166,0.12); }
+  .toc-intro .toc-grid a .n { color:var(--main); font-weight:700; font-size:0.72rem; width:24px; letter-spacing:0.1em; }
+  .toc-btn { opacity:0; pointer-events:none; transition:opacity 0.4s; }
+  .toc-btn.shown { opacity:1; pointer-events:auto; }
+  [data-theme="night"] .toc-intro .toc-grid a { background:#1a1a2e; color:#f0f0ff; border-color:rgba(255,255,255,0.08); }
+</style>
+<section id="sec-toc">
+  <div class="toc-intro">
+    <div class="toc-heading reveal">目次</div>
+    <div class="toc-sub reveal">気になるところからお読みください</div>
+    <nav class="toc-grid reveal delay-1" id="tocGrid"></nav>
+  </div>
 </section>
 
 <!-- ===== ABOUT ===== -->
