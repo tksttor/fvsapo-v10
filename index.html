@@ -1536,11 +1536,8 @@ footer {
     <div class="section-label reveal">OPERATION — SECONDLIFE</div>
     <h2 class="section-title reveal">SecondLife版 基本操作</h2>
     <div class="reveal" style="text-align:center;margin-top:16px;">
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">SECOND LIFE KEYBOARD — 光っているキーを押してみてください</p>
-      <div class="sl-os-toggle-outer">
-        <button type="button" class="sl-os-btn" data-os="win">Windows</button>
-        <button type="button" class="sl-os-btn" data-os="mac">Mac</button>
-      </div>
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:6px;">SECOND LIFE KEYBOARD — 光っているキーを押してみてください</p>
+      <p style="font-size:0.72rem;color:var(--gray);">※ Windowsキーボードで表記しています</p>
     </div>
   </div>
 </section>
@@ -1627,10 +1624,6 @@ footer {
       .sl-kb-rows { width:100%; max-width:100%; display:flex; flex-direction:column; align-items:center; gap:3px; }
       .sl-kb-row { justify-content:center; width:100%; display:flex; gap:5px; }
       .sl-kb-title { text-align:center; color:rgba(255,255,255,0.5); font-size:0.72rem; margin-bottom:6px; letter-spacing:0.1em; }
-      .sl-os-toggle-outer { display:inline-flex; gap:6px; justify-content:center; background:#f0f0e8; padding:4px; border-radius:20px; }
-      .sl-os-btn { background:transparent; color:var(--gray); border:none; padding:6px 18px; border-radius:16px; font-size:0.78rem; cursor:pointer; font-weight:700; transition:all 0.2s; }
-      .sl-os-btn:hover { color:var(--main-dark); }
-      .sl-os-btn.active { background:var(--main); color:#fff; }
       .sl-kb-rows { display:flex; flex-direction:column; align-items:center; gap:4px; }
       .sl-kb-row { display:flex; gap:3px; }
       .sk { flex:1 1 0; min-width:0; max-width:80px; height:clamp(44px, 6vh, 60px); border-radius:6px; display:flex; align-items:center; justify-content:center;
@@ -1744,7 +1737,7 @@ footer {
         { keys:[{l:'Ctrl',lm:'control',s:DIM,w:'w1-5'},{l:'Win',lm:'⌘',s:DIM},{l:'Alt',lm:'option',k:'alt',s:LIT,w:'w1-25'},{l:'Space',k:'space',s:LIT,w:'w6'},{l:'Alt',lm:'option',s:DIM,w:'w1-25'},{l:'Fn',s:DIM},{l:'Ctrl',lm:'control',s:DIM,w:'w1-5'},{l:'←',k:'left',s:LIT},{l:'↑',k:'up',s:LIT},{l:'↓',k:'down',s:LIT},{l:'→',k:'right',s:LIT}] },
       ];
       // Mac/Windows 判定（初回：自動検出）
-      let currentOS = /mac|darwin/i.test(navigator.platform || navigator.userAgent) ? 'mac' : 'win';
+      const currentOS = 'win'; // Windows表記固定
       const rowsEl = document.getElementById('slKbRows');
       function renderKeyboard() {
         rowsEl.innerHTML = '';
@@ -1905,22 +1898,6 @@ footer {
       }
       attachKeyHandlers();
 
-      // OS 切替ボタン
-      document.querySelectorAll('.sl-os-btn').forEach(btn => {
-        if (btn.dataset.os === currentOS) btn.classList.add('active');
-        btn.addEventListener('click', () => {
-          currentOS = btn.dataset.os;
-          document.querySelectorAll('.sl-os-btn').forEach(b => b.classList.toggle('active', b.dataset.os === currentOS));
-          acts.e.desc = currentOS === 'mac' ? 'E で飛行。C で下降' : 'E / PgUp で飛行。C で下降';
-          acts.enter.desc = currentOS === 'mac' ? 'return でチャット欄を開きます。話さなくても大丈夫' : 'Enter でチャット欄を開きます。話さなくても大丈夫';
-          renderKeyboard();
-          attachKeyHandlers();
-        });
-      });
-      if (currentOS === 'mac') {
-        acts.e.desc = 'E で飛行。C で下降';
-        acts.enter.desc = 'return でチャット欄を開きます。話さなくても大丈夫';
-      }
     })();
     </script>
 
