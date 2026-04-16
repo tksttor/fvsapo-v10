@@ -1196,7 +1196,7 @@ footer {
   .toc-panel.open { right:0; }
   .toc-panel-head { padding:10px 24px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:12px; }
   .toc-panel-head .title { font-weight:900; font-size:1rem; letter-spacing:0.15em; color:var(--main-dark); }
-  .toc-panel-close { background:transparent; border:none; font-size:1.5rem; color:var(--gray); cursor:pointer; padding:4px 10px; line-height:1; }
+  .toc-panel-close { background:transparent; border:none; font-size:1.5rem; color:var(--gray); cursor:pointer; min-width:44px; min-height:44px; line-height:1; display:flex; align-items:center; justify-content:center; border-radius:50%; }
   .toc-panel-close:hover { color:var(--main); }
   .toc-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:198; opacity:0; pointer-events:none; transition:opacity 0.3s; backdrop-filter:blur(2px); }
   .toc-overlay.show { opacity:1; pointer-events:auto; }
@@ -1206,7 +1206,8 @@ footer {
   .toc-panel .toc-num { display:inline-block; width:26px; color:var(--main); font-size:0.78rem; font-weight:700; letter-spacing:0.05em; }
 
   .toc-dots { position:fixed; top:50%; right:12px; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; gap:10px; }
-  .toc-dot { width:10px; height:10px; border-radius:50%; background:rgba(0,0,0,0.18); cursor:pointer; transition:all 0.25s; position:relative; }
+  .toc-dot { width:10px; height:10px; padding:0; border:none; border-radius:50%; background:rgba(0,0,0,0.18); cursor:pointer; transition:all 0.25s; position:relative; }
+  .toc-dot:focus-visible { outline:2px solid var(--main); outline-offset:3px; }
   .toc-dot:hover { background:var(--main); transform:scale(1.3); }
   .toc-dot.active { background:var(--main); transform:scale(1.4); box-shadow:0 0 0 3px rgba(0,120,166,0.2); }
   .toc-dot .toc-dot-label { position:absolute; right:20px; top:50%; transform:translateY(-50%); background:#1a1a2e; color:#fff; padding:4px 10px; border-radius:6px; font-size:0.72rem; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity 0.2s; }
@@ -1218,7 +1219,12 @@ footer {
   [data-theme="night"] .toc-panel a { color:#f0f0ff; }
   [data-theme="night"] .toc-panel a:hover { background:rgba(255,255,255,0.05); }
   [data-theme="night"] .toc-dot { background:rgba(255,255,255,0.25); }
-  @media (max-width:480px) { .toc-dots { display:none; } }
+  @media (max-width:480px) {
+    .toc-dots { top:auto; bottom:16px; right:50%; transform:translateX(50%); flex-direction:row; gap:8px; background:rgba(255,255,255,0.9); backdrop-filter:blur(6px); padding:8px 12px; border-radius:20px; box-shadow:0 4px 16px rgba(0,0,0,0.1); }
+    .toc-dot { width:8px; height:8px; }
+    .toc-dot .toc-dot-label { display:none; }
+    [data-theme="night"] .toc-dots { background:rgba(26,26,46,0.9); }
+  }
 </style>
 
 <button type="button" class="toc-btn" id="tocBtn" aria-label="目次を開く">☰</button>
@@ -1235,20 +1241,20 @@ footer {
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   const sections = [
-    { id:'sec-hero', name:'トップ' },
-    { id:'sec-about', name:'Vサポルームとは' },
-    { id:'sec-target', name:'利用対象者' },
-    { id:'sec-support', name:'支援メニュー' },
-    { id:'sec-apps', name:'使用するアプリ' },
-    { id:'sec-reg', name:'利用登録' },
-    { id:'sec-flow', name:'利用までの流れ' },
-    { id:'sec-rules', name:'ご利用ルール' },
-    { id:'sec-spec', name:'推奨スペック' },
-    { id:'sec-sl-setup', name:'SecondLife セットアップ' },
-    { id:'sec-sl-ops', name:'SecondLife 基本操作' },
-    { id:'sec-fv-setup', name:'FukuokaVsapo セットアップ' },
-    { id:'sec-faq', name:'よくあるご質問' },
-    { id:'sec-cta', name:'お問い合わせ' },
+    { id:'sec-hero', name:'トップ', group:'はじめに' },
+    { id:'sec-about', name:'Vサポルームとは', group:'はじめに' },
+    { id:'sec-target', name:'利用対象者', group:'はじめに' },
+    { id:'sec-support', name:'支援メニュー', group:'はじめに' },
+    { id:'sec-apps', name:'使用するアプリ', group:'はじめに' },
+    { id:'sec-reg', name:'利用登録', group:'① 登録する' },
+    { id:'sec-flow', name:'利用までの流れ', group:'① 登録する' },
+    { id:'sec-rules', name:'ご利用ルール', group:'① 登録する' },
+    { id:'sec-spec', name:'推奨スペック', group:'② 使いはじめる' },
+    { id:'sec-sl-setup', name:'SecondLife セットアップ', group:'② 使いはじめる' },
+    { id:'sec-sl-ops', name:'SecondLife 基本操作', group:'② 使いはじめる' },
+    { id:'sec-fv-setup', name:'FukuokaVsapo セットアップ', group:'② 使いはじめる' },
+    { id:'sec-faq', name:'よくあるご質問', group:'③ 困ったら' },
+    { id:'sec-cta', name:'お問い合わせ', group:'③ 困ったら' },
   ];
   const panel = document.getElementById('tocPanel');
   const panelList = document.getElementById('tocPanelList');
@@ -1257,6 +1263,7 @@ document.addEventListener('DOMContentLoaded', function(){
   const overlay = document.getElementById('tocOverlay');
   const intro = document.getElementById('tocGrid');
   const secToc = document.getElementById('sec-toc');
+  let currentGroup = null;
   sections.forEach((s, i) => {
     // panel link
     const a = document.createElement('a');
@@ -1265,42 +1272,56 @@ document.addEventListener('DOMContentLoaded', function(){
     a.innerHTML = `<span class="toc-num">${String(i+1).padStart(2,'0')}</span>${s.name}`;
     a.addEventListener('click', () => closePanel());
     panelList.appendChild(a);
-    // dot
-    const d = document.createElement('div');
+    // dot button (a11y)
+    const d = document.createElement('button');
+    d.type = 'button';
     d.className = 'toc-dot';
     d.dataset.sid = s.id;
+    d.setAttribute('aria-label', s.name);
     d.innerHTML = `<span class="toc-dot-label">${s.name}</span>`;
     d.addEventListener('click', () => {
       document.getElementById(s.id)?.scrollIntoView({ behavior:'smooth', block:'start' });
     });
     dots.appendChild(d);
-    // inline grid (目次セクション)
+    // inline grid（目次セクション、群ラベル付き）
     if (intro) {
+      if (s.group !== currentGroup) {
+        const label = document.createElement('div');
+        label.className = 'toc-group-label';
+        label.textContent = s.group;
+        intro.appendChild(label);
+        currentGroup = s.group;
+      }
       const g = document.createElement('a');
       g.href = '#' + s.id;
       g.innerHTML = `<span class="n">${String(i+1).padStart(2,'0')}</span><span class="name">${s.name}</span>`;
       intro.appendChild(g);
     }
   });
-  function openPanel() { panel.classList.add('open'); overlay.classList.add('show'); }
-  function closePanel() { panel.classList.remove('open'); overlay.classList.remove('show'); }
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'tocPanel');
+  function openPanel() {
+    panel.classList.add('open'); overlay.classList.add('show');
+    btn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => panelList.querySelector('a')?.focus(), 300);
+  }
+  function closePanel() {
+    panel.classList.remove('open'); overlay.classList.remove('show');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.focus();
+  }
   btn.addEventListener('click', () => panel.classList.contains('open') ? closePanel() : openPanel());
   overlay.addEventListener('click', closePanel);
   document.getElementById('tocClose')?.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) closePanel(); });
   // ハンバーガーボタンの表示制御：sec-toc を通り過ぎたら表示
   if (secToc) {
     const tocBtnObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        // sec-toc が表示中ならボタン非表示、過ぎたら表示
         btn.classList.toggle('shown', !e.isIntersecting && window.scrollY > 200);
       });
     }, { rootMargin:'0px' });
     tocBtnObserver.observe(secToc);
-    window.addEventListener('scroll', () => {
-      const r = secToc.getBoundingClientRect();
-      const passed = r.bottom < 0;
-      btn.classList.toggle('shown', passed);
-    }, { passive:true });
   }
   // 現在位置の検出（IntersectionObserver）
   const secs = sections.map(s => document.getElementById(s.id)).filter(Boolean);
@@ -1338,17 +1359,19 @@ document.addEventListener('DOMContentLoaded', function(){
   .toc-intro { padding:60px 20px 80px; max-width:560px; margin:0 auto; }
   .toc-intro .toc-heading { text-align:center; font-size:1.6rem; letter-spacing:0.3em; color:var(--main-dark); margin-bottom:4px; font-weight:300; }
   .toc-intro .toc-heading::after { content:''; display:block; width:32px; height:1px; background:var(--main); margin:12px auto 0; }
-  .toc-intro .toc-sub { text-align:center; font-size:0.85rem; color:var(--gray); margin-bottom:48px; letter-spacing:0.05em; }
+  .toc-intro .toc-sub { text-align:center; font-size:0.85rem; color:var(--gray); margin-bottom:40px; letter-spacing:0.05em; }
+  .toc-group-label { display:flex; align-items:center; gap:12px; margin:32px 0 8px; font-size:0.72rem; color:var(--main-dark); letter-spacing:0.2em; font-weight:700; }
+  .toc-group-label:first-child { margin-top:0; }
+  .toc-group-label::before { content:''; flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--main) 30%, var(--main)); opacity:0.35; }
+  .toc-group-label::after { content:''; flex:3; height:1px; background:linear-gradient(90deg, var(--main), transparent); opacity:0.35; }
   .toc-intro .toc-grid { display:flex; flex-direction:column; }
-  .toc-intro .toc-grid a { display:flex; align-items:flex-start; gap:28px; padding:16px 4px; color:var(--text,#1a1a2e); text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.06); transition:all 0.3s; position:relative; }
-  .toc-intro .toc-grid a:last-child { border-bottom:none; }
-  .toc-intro .toc-grid a:hover { padding-left:16px; background:rgba(0,120,166,0.03); }
+  .toc-intro .toc-grid a { display:flex; align-items:flex-start; gap:28px; padding:16px 4px; color:var(--text,#1a1a2e); text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.06); transition:background 0.3s; position:relative; border-radius:4px; }
+  .toc-intro .toc-grid a:hover { background:rgba(0,120,166,0.04); }
   .toc-intro .toc-grid a::after { content:'→'; position:absolute; right:0; top:50%; transform:translateY(-50%) translateX(-8px); opacity:0; color:var(--main); transition:all 0.3s; font-size:1rem; }
   .toc-intro .toc-grid a:hover::after { opacity:1; transform:translateY(-50%) translateX(0); }
+  .toc-intro .toc-grid a:focus-visible { outline:2px solid var(--main); outline-offset:2px; }
   .toc-intro .toc-grid a .n { color:var(--main); opacity:0.5; font-weight:300; font-size:0.75rem; width:28px; letter-spacing:0.08em; padding-top:3px; font-variant-numeric:tabular-nums; }
   .toc-intro .toc-grid a .name { font-size:1.05rem; font-weight:500; flex:1; line-height:1.4; }
-  /* 群分け：概要（1-9）／ 操作手順（10-12）／ 補足（13-14）で空気を入れる */
-  .toc-intro .toc-grid a:nth-child(10), .toc-intro .toc-grid a:nth-child(13) { margin-top:24px; padding-top:24px; border-top:1px solid rgba(0,0,0,0.06); }
   [data-theme="night"] .toc-intro .toc-grid a { border-bottom-color:rgba(255,255,255,0.08); }
   [data-theme="night"] .toc-intro .toc-grid a:hover { background:rgba(0,198,255,0.06); }
   .toc-btn { opacity:0; pointer-events:none; transition:opacity 0.4s; }
@@ -1590,7 +1613,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <div class="step-item"><div><h3>サイトにアクセス</h3><p>SecondLife公式サイトを開き「<strong>Join now</strong>」をクリック。サイトは英語ですがそのまま進めてOKです。</p><div style="margin-top:10px;"><a href="https://secondlife.com/" target="_blank" style="font-size:0.85rem;color:var(--main-dark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;">SecondLife公式サイトを開く →</a></div></div></div>
         <div class="step-item"><div><h3>ユーザー登録</h3><p>ユーザー名・パスワード・メール・生年月日等を入力。「Create an account」で登録完了。</p><div style="margin-top:10px;"><a href="https://join.secondlife.com/" target="_blank" style="font-size:0.85rem;color:var(--main-dark);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;">SecondLifeサインアップページを開く →</a></div></div></div>
         <div class="step-item"><div><h3>ダウンロード＆インストール</h3><p>アカウント作成後、ビューアーをDL・インストールします（約200MB）。</p></div></div>
-        <div class="step-item"><div><h3>プランについて</h3><p>アカウントは無料の「<strong style="color:#e53e3e;">Basic</strong>」で十分です。有料プランへのアップグレードや<strong style="color:#e53e3e;">クレジットカードの登録は不要</strong>です。</p></div></div>
+        <div class="step-item"><div><h3>プランについて</h3><p>・アカウントは、無料の「<strong style="color:#e53e3e;">Basic</strong>」を選択してください。<br>&nbsp;&nbsp;※有料プランを選択しないようご注意ください。<br>・<strong style="color:#e53e3e;">クレジットカードの登録はしないでください</strong>。</p></div></div>
         <div class="step-item"><div><h3>日本語に設定</h3><p>ビューアー起動後、上部メニュー「<strong>Me</strong>」→「<strong>Preferences</strong>」→「<strong>General</strong>」タブ→「<strong>Language</strong>」を「日本語」に変更→ビューアーを再起動すると日本語になります。</p></div></div>
       </div>
     </div>
