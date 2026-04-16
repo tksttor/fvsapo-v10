@@ -1507,6 +1507,8 @@ footer {
       .sl-avatar.fly { transform:translateX(-50%) translateY(-100px); }
       .sl-avatar.fly .sl-av-shadow { opacity:0.2; transform:scale(0.4); }
       .sl-avatar.fly .sl-av-leg { animation:none!important; }
+      .sl-avatar.jump { animation:sl-jump 0.6s ease-out; }
+      @keyframes sl-jump { 0%,100% { transform:translateX(-50%) translateY(0); } 40% { transform:translateX(-50%) translateY(-60px); } }
       .sl-avatar.chat .sl-av-bubble { opacity:1; }
       .sl-avatar.cam .sl-av-head { box-shadow:0 0 24px rgba(255,193,7,0.7); }
       @keyframes sl-legL { from{transform:rotateX(-25deg)}to{transform:rotateX(25deg)} }
@@ -1674,7 +1676,7 @@ footer {
         d:{cls:'walk',dx:-1,dy:0,label:'右に旋回',desc:'→ / D で右に回転します',lit:['d','right']},
         right:{cls:'walk',dx:-1,dy:0,label:'右に旋回',desc:'→ / D で右に回転します',lit:['d','right']},
         e:{cls:'fly',dx:0,dy:0,label:'飛行（上昇）',desc:'E / PgUp で飛行。C で下降',lit:['e','space','c']},
-        space:{cls:'fly',dx:0,dy:0,label:'ジャンプ / 飛行',desc:'Space でジャンプ → 長押しで飛行開始',lit:['space','e']},
+        space:{cls:'jump',dx:0,dy:0,label:'ジャンプ',desc:'Space で一瞬ジャンプします',lit:['space']},
         c:{cls:'',dx:0,dy:0.3,label:'下降',desc:'C で下降します（飛行中）',lit:['c']},
         enter:{cls:'chat',dx:0,dy:0,label:'チャット',desc:'Enter でチャット欄を開きます。話さなくても大丈夫',lit:['enter','t']},
         t:{cls:'chat',dx:0,dy:0,label:'チャット',desc:'T / Enter でチャット欄を開きます',lit:['t','enter']},
@@ -1695,7 +1697,7 @@ footer {
       function activate(k){
         const a=acts[k]; if(!a) return;
         clearTimeout(timer);
-        if (k === 'e' || k === 'space') flyingMode = true;
+        if (k === 'e') flyingMode = true;
         else if (k === 'c') flyingMode = false;
         updateAvatarClass(a.cls);
         document.querySelectorAll('.sk').forEach(el=>el.classList.remove('active'));
