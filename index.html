@@ -1340,13 +1340,15 @@ document.addEventListener('DOMContentLoaded', function(){
   .toc-intro .toc-heading::after { content:''; display:block; width:32px; height:1px; background:var(--main); margin:12px auto 0; }
   .toc-intro .toc-sub { text-align:center; font-size:0.85rem; color:var(--gray); margin-bottom:48px; letter-spacing:0.05em; }
   .toc-intro .toc-grid { display:flex; flex-direction:column; }
-  .toc-intro .toc-grid a { display:flex; align-items:baseline; gap:20px; padding:18px 4px; color:var(--text,#1a1a2e); text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.06); transition:all 0.3s; position:relative; }
+  .toc-intro .toc-grid a { display:flex; align-items:flex-start; gap:28px; padding:16px 4px; color:var(--text,#1a1a2e); text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.06); transition:all 0.3s; position:relative; }
   .toc-intro .toc-grid a:last-child { border-bottom:none; }
   .toc-intro .toc-grid a:hover { padding-left:16px; background:rgba(0,120,166,0.03); }
   .toc-intro .toc-grid a::after { content:'→'; position:absolute; right:0; top:50%; transform:translateY(-50%) translateX(-8px); opacity:0; color:var(--main); transition:all 0.3s; font-size:1rem; }
   .toc-intro .toc-grid a:hover::after { opacity:1; transform:translateY(-50%) translateX(0); }
-  .toc-intro .toc-grid a .n { color:var(--main); font-weight:300; font-size:1.4rem; width:40px; letter-spacing:0.02em; font-variant-numeric:tabular-nums; }
-  .toc-intro .toc-grid a .name { font-size:1rem; font-weight:500; flex:1; }
+  .toc-intro .toc-grid a .n { color:var(--main); opacity:0.5; font-weight:300; font-size:0.75rem; width:28px; letter-spacing:0.08em; padding-top:3px; font-variant-numeric:tabular-nums; }
+  .toc-intro .toc-grid a .name { font-size:1.05rem; font-weight:500; flex:1; line-height:1.4; }
+  /* 群分け：概要（1-9）／ 操作手順（10-12）／ 補足（13-14）で空気を入れる */
+  .toc-intro .toc-grid a:nth-child(10), .toc-intro .toc-grid a:nth-child(13) { margin-top:24px; padding-top:24px; border-top:1px solid rgba(0,0,0,0.06); }
   [data-theme="night"] .toc-intro .toc-grid a { border-bottom-color:rgba(255,255,255,0.08); }
   [data-theme="night"] .toc-intro .toc-grid a:hover { background:rgba(0,198,255,0.06); }
   .toc-btn { opacity:0; pointer-events:none; transition:opacity 0.4s; }
