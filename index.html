@@ -1229,6 +1229,23 @@ footer {
   }
 </style>
 
+<!-- 動-1 スティッキー：現在のセクション名を上部に常駐 -->
+<style>
+  .sticky-head { position:fixed; top:0; left:0; right:0; z-index:150; background:rgba(255,255,255,0.92); backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,0,0,0.06); padding:10px 72px; display:flex; align-items:center; gap:14px; transform:translateY(-100%); transition:transform 0.35s cubic-bezier(.22,.61,.36,1); }
+  .sticky-head.shown { transform:translateY(0); }
+  .sticky-head .sh-num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg, var(--main), var(--accent)); color:#fff; font-weight:700; font-size:0.75rem; flex-shrink:0; letter-spacing:0.02em; }
+  .sticky-head .sh-label { font-size:0.78rem; color:var(--gray); letter-spacing:0.12em; margin-right:4px; }
+  .sticky-head .sh-name { font-size:0.95rem; font-weight:700; color:var(--text,#1a1a2e); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  [data-theme="night"] .sticky-head { background:rgba(13,17,23,0.92); border-bottom-color:rgba(255,255,255,0.08); }
+  [data-theme="night"] .sticky-head .sh-name { color:#f0f0ff; }
+  @media (max-width:480px) { .sticky-head { padding:10px 64px; } .sticky-head .sh-label { display:none; } }
+</style>
+<div class="sticky-head" id="stickyHead" aria-hidden="true">
+  <span class="sh-num" id="shNum">01</span>
+  <span class="sh-label">SECTION</span>
+  <span class="sh-name" id="shName">トップ</span>
+</div>
+
 <button type="button" class="toc-btn" id="tocBtn" aria-label="目次を開く">☰</button>
 
 <!-- ===== HELP DRAWER (構造-8) ===== -->
@@ -1396,16 +1413,33 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   // 現在位置の検出（IntersectionObserver）
   const secs = sections.map(s => document.getElementById(s.id)).filter(Boolean);
+  const stickyHead = document.getElementById('stickyHead');
+  const shNum = document.getElementById('shNum');
+  const shName = document.getElementById('shName');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.id;
         document.querySelectorAll('.toc-panel a').forEach(a => a.classList.toggle('active', a.dataset.sid === id));
         document.querySelectorAll('.toc-dot').forEach(d => d.classList.toggle('active', d.dataset.sid === id));
+        const idx = sections.findIndex(s => s.id === id);
+        if (idx >= 0 && stickyHead) {
+          shNum.textContent = String(idx+1).padStart(2,'0');
+          shName.textContent = sections[idx].name;
+        }
       }
     });
   }, { rootMargin:'-40% 0px -55% 0px' });
   secs.forEach(s => observer.observe(s));
+  // スティッキー帯の表示制御：sec-toc を通り過ぎたら表示
+  if (secToc && stickyHead) {
+    const shObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        stickyHead.classList.toggle('shown', !e.isIntersecting && window.scrollY > 200);
+      });
+    });
+    shObserver.observe(secToc);
+  }
 });
 </script>
 
