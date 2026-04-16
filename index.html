@@ -1647,6 +1647,38 @@ footer {
   </div>
 </section>
 
+<!-- ===== FEEDBACK FORM (Netlify Forms / 修正完了後に削除) ===== -->
+<section style="background:linear-gradient(135deg,#f8f9fa,#eef2f7);padding:60px 0;">
+  <div class="container" style="max-width:680px;">
+    <h2 class="section-title reveal" style="font-size:1.1rem;">このページへのご意見・ご感想</h2>
+    <p class="reveal" style="font-size:0.82rem;color:#666;text-align:center;margin-bottom:24px;">ログイン不要です。お気軽にどうぞ。</p>
+    <form name="feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:14px;">
+      <input type="hidden" name="form-name" value="feedback">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div style="display:flex;gap:12px;">
+        <input type="text" name="name" placeholder="お名前（任意）" style="flex:1;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;background:#fff;">
+        <select name="section" style="padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.85rem;background:#fff;color:#333;">
+          <option value="">対象セクション</option>
+          <option value="HERO">HERO</option>
+          <option value="ABOUT">サービス概要</option>
+          <option value="SUPPORT">支援メニュー</option>
+          <option value="APPLICATION">アプリについて</option>
+          <option value="REGISTRATION">利用登録</option>
+          <option value="SPEC">推奨スペック</option>
+          <option value="SETUP-SL">SLセットアップ</option>
+          <option value="OPERATION-SL">SL基本操作</option>
+          <option value="SETUP-FV">FVセットアップ</option>
+          <option value="RULES">ルール</option>
+          <option value="FAQ">よくある質問</option>
+          <option value="全体">全体</option>
+        </select>
+      </div>
+      <textarea name="message" rows="4" placeholder="気づいたこと、直したほうがいい点、よかった点など" required style="padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:0.9rem;resize:vertical;background:#fff;line-height:1.7;"></textarea>
+      <button type="submit" style="align-self:flex-end;background:var(--main);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.9rem;transition:filter 0.2s;" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter=''">送信する</button>
+    </form>
+  </div>
+</section>
+
 <footer>
   メタバース活用就労支援事業｜福岡県委託事業｜運営：特定非営利活動法人JACFA<br>
   Copyright © Fukuoka Prefecture. All rights reserved.
