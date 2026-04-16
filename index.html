@@ -1233,7 +1233,7 @@ footer {
 <div class="toc-dots" id="tocDots"></div>
 
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   const sections = [
     { id:'sec-hero', name:'トップ' },
     { id:'sec-about', name:'Vサポルームとは' },
@@ -1314,7 +1314,7 @@ footer {
     });
   }, { rootMargin:'-40% 0px -55% 0px' });
   secs.forEach(s => observer.observe(s));
-})();
+});
 </script>
 
 <!-- ===== HERO ===== -->
