@@ -1718,11 +1718,19 @@ footer {
           if (a.dx) turn += a.dx;    // A:+1, D:-1
         });
         if (forward !== 0) {
-          // 前進：植物のzを増やす（カメラ側＝正方向へ近づく）。W(forward=-1) → dz=+12
-          const dz = -forward * 12;
-          advancePlants(dz);
-          // 地面グリッドを縦にスクロール（奥→手前）
-          floorY += dz * 0.5;
+          // 前進：旋回角度で進行方向ベクトルを回転（180°旋回後も正しく前進）
+          const step = -forward * 12;
+          const rad = sceneRot * Math.PI / 180;
+          const dz = step * Math.cos(rad);
+          const dx = step * Math.sin(rad);
+          plants.forEach(p => {
+            p.z += dz;
+            p.x += dx;
+            if (p.z > Z_NEAR) { p.z -= (Z_NEAR - Z_FAR); p.x = randomX(); }
+            if (p.z < Z_FAR) { p.z += (Z_NEAR - Z_FAR); p.x = randomX(); }
+            applyPlant(p);
+          });
+          floorY += step * 0.5;
           if (floorGrid) floorGrid.style.backgroundPosition = `0 ${floorY}px, 0 ${floorY}px`;
           if (path3d) path3d.style.setProperty('--path-y', (floorY % 68) + 'px');
         }
