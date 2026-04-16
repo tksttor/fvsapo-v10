@@ -1658,7 +1658,9 @@ footer {
       const floorGrid = document.getElementById('slFloorGrid');
       const path3d = document.getElementById('slPath3d');
       const layers={clouds:document.getElementById('slClouds'),mtns:document.getElementById('slMtns')};
-      let cloudX=0, turnX=0, floorY=0, timer=null;
+      let cloudX=0, turnX=0, floorY=0, sceneRot=0, timer=null;
+      const floorEl = document.querySelector('.sl-floor');
+      const vegEl = document.getElementById('slVeg');
 
       const acts={
         w:{cls:'walk',dx:0,dy:-1,label:'前進',desc:'↑ / W で前に進みます',lit:['w','up']},
@@ -1680,13 +1682,23 @@ footer {
       };
 
       // dx: 前進(-1)/後退(+1) → 円柱のロール（Z軸回転）
-      // dy: 旋回 左(-1)/右(+1) → カメラのY軸回転
+      // 飛行モード：Eで ON、Cで OFF（トグル型、押し続け不要）
+      let flyingMode = false;
+      function updateAvatarClass(extraCls) {
+        const cls = ['sl-avatar'];
+        if (flyingMode) cls.push('fly');
+        if (extraCls && extraCls !== 'fly') cls.push(extraCls);
+        avatar.className = cls.join(' ');
+      }
       function activate(k){
         const a=acts[k]; if(!a) return;
         clearTimeout(timer);
-        avatar.className='sl-avatar'+(a.cls?' '+a.cls:'');
+        if (k === 'e' || k === 'space') flyingMode = true;
+        else if (k === 'c') flyingMode = false;
+        updateAvatarClass(a.cls);
         document.querySelectorAll('.sk').forEach(el=>el.classList.remove('active'));
         (a.lit||[]).forEach(kk=>{ const el=document.querySelector(`.sk[data-k="${kk}"]`); if(el) el.classList.add('active'); });
+        if (flyingMode) { const eEl = document.querySelector('.sk[data-k="e"]'); if (eEl) eEl.classList.add('active'); }
         action.textContent=a.label; action.classList.add('show');
         desc.textContent=a.desc; desc.classList.add('show');
       }
@@ -1715,10 +1727,13 @@ footer {
           if (path3d) path3d.style.setProperty('--path-y', (floorY % 68) + 'px');
         }
         if (turn !== 0) {
-          // 旋回：植物のxをずらす（視点が逆にパン）
-          plants.forEach(p => { p.x += turn * 10; applyPlant(p); });
-          cloudX += turn * 2;
-          turnX += turn * 3;
+          // 旋回：植生と地面をY軸で回転（視点が回る）
+          sceneRot += turn * 0.6;
+          const rotY = -sceneRot;
+          if (vegEl) vegEl.style.transform = `rotateY(${rotY}deg)`;
+          if (floorEl) floorEl.style.transform = `translateX(-50%) rotateY(${rotY}deg) rotateX(75deg)`;
+          cloudX += turn * 0.3;
+          turnX += turn * 0.5;
           layers.clouds.style.transform = `translateX(${cloudX}px)`;
           layers.mtns.style.transform = `translateX(${turnX}px)`;
         }
@@ -1737,10 +1752,11 @@ footer {
         if (heldKeys.size === 0) {
           clearTimeout(timer);
           timer = setTimeout(() => {
-            avatar.className = 'sl-avatar';
+            updateAvatarClass('');
             action.classList.remove('show');
             desc.classList.remove('show');
             document.querySelectorAll('.sk').forEach(el => el.classList.remove('active'));
+            if (flyingMode) { const eEl = document.querySelector('.sk[data-k="e"]'); if (eEl) eEl.classList.add('active'); }
           }, 500);
         }
       }
