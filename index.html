@@ -1529,9 +1529,9 @@ document.addEventListener('DOMContentLoaded', function(){
   /* スクロール-マスクで現れる：要素が画面に入ると左から塗り出される */
   .scroll-mask { -webkit-mask-image:linear-gradient(90deg, #000 var(--mask-p, 0%), transparent var(--mask-p, 0%)); mask-image:linear-gradient(90deg, #000 var(--mask-p, 0%), transparent var(--mask-p, 0%)); transition:none; will-change:mask-image; }
 
-  /* テキストグラデーション（視覚-13） */
-  .text-gradient { background:linear-gradient(90deg, var(--main), var(--accent), #feca57); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:textGradShift 6s linear infinite; display:inline-block; }
-  @keyframes textGradShift { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+  /* テキストグラデーション（視覚-13）パステル、左→右 */
+  .text-gradient { background:linear-gradient(90deg, #ffb3c6, #b5ead7, #c7ceea, #ffdac1, #ffb3c6); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:textGradShift 8s linear infinite; display:inline-block; }
+  @keyframes textGradShift { 0% { background-position:200% 50%; } 100% { background-position:0% 50%; } }
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
