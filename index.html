@@ -1190,8 +1190,10 @@ footer {
 
 <!-- ===== TOC (hamburger + dot nav) ===== -->
 <style>
-  .toc-btn { position:fixed; top:16px; right:16px; z-index:200; width:46px; height:46px; border-radius:50%; background:var(--main); color:#fff; border:none; box-shadow:0 6px 20px rgba(0,120,166,0.3); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.25rem; transition:transform 0.2s, background 0.2s; }
+  .toc-btn { position:fixed; top:16px; right:16px; z-index:200; width:46px; height:46px; border-radius:50%; background:var(--main); color:#fff; border:none; box-shadow:0 6px 20px rgba(0,120,166,0.3); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.25rem; transition:transform 0.35s cubic-bezier(.22,.61,.36,1), background 0.2s, opacity 0.35s; }
   .toc-btn:hover { transform:scale(1.08); background:var(--main-dark); }
+  .toc-btn.hidden-dir { transform:translateY(-80px); opacity:0; pointer-events:none; }
+  .help-btn.hidden-dir { transform:translateY(-80px); opacity:0; pointer-events:none; }
   .toc-panel { position:fixed; top:0; right:-360px; width:340px; max-width:88vw; height:100vh; background:#fafaf7; box-shadow:-8px 0 32px rgba(0,0,0,0.18); z-index:199; transition:right 0.4s cubic-bezier(.22,.61,.36,1); overflow-y:auto; padding:24px 0 24px; }
   .toc-panel.open { right:0; }
   .toc-panel-head { padding:10px 24px 18px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:12px; }
@@ -1358,7 +1360,7 @@ document.addEventListener('DOMContentLoaded', function(){
   overlay.addEventListener('click', closePanel);
   document.getElementById('tocClose')?.addEventListener('click', closePanel);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) closePanel(); });
-  // ハンバーガーボタンの表示制御：sec-toc を通り過ぎたら表示
+  // ハンバーガー/ヘルプボタンの表示制御：sec-toc を通り過ぎたら表示
   const helpBtn = document.getElementById('helpBtn');
   if (secToc) {
     const tocBtnObserver = new IntersectionObserver((entries) => {
@@ -1370,6 +1372,17 @@ document.addEventListener('DOMContentLoaded', function(){
     }, { rootMargin:'0px' });
     tocBtnObserver.observe(secToc);
   }
+  // 構造-1 スクロール方向で切替：下にスクロール→隠す、上にスクロール→見せる
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const diff = y - lastY;
+    if (Math.abs(diff) < 4) return;
+    const goingDown = diff > 0 && y > 300;
+    btn.classList.toggle('hidden-dir', goingDown);
+    if (helpBtn) helpBtn.classList.toggle('hidden-dir', goingDown);
+    lastY = y;
+  }, { passive:true });
   // ヘルプドロワー
   const helpDrawer = document.getElementById('helpDrawer');
   const helpClose = document.getElementById('helpClose');
