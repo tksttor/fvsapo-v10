@@ -1736,7 +1736,7 @@ footer {
         }
         if (turn !== 0) {
           // 旋回：植生と地面をY軸で回転（視点が回る）
-          sceneRot += turn * 0.6;
+          sceneRot += turn * 0.3;
           const rotY = -sceneRot;
           if (vegEl) vegEl.style.transform = `rotateY(${rotY}deg)`;
           if (floorEl) floorEl.style.transform = `translateX(-50%) rotateY(${rotY}deg) rotateX(75deg)`;
