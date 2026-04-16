@@ -1445,6 +1445,13 @@ footer {
     <img src="assets/vsapo-round-logo.png" alt="" aria-hidden="true" class="section-logo">
     <div class="section-label reveal">OPERATION — SECONDLIFE</div>
     <h2 class="section-title reveal">SecondLife版 基本操作</h2>
+    <div class="reveal" style="text-align:center;margin-top:16px;">
+      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:10px;">SECOND LIFE KEYBOARD — 光っているキーを押してみてください</p>
+      <div class="sl-os-toggle-outer">
+        <button type="button" class="sl-os-btn" data-os="win">Windows</button>
+        <button type="button" class="sl-os-btn" data-os="mac">Mac</button>
+      </div>
+    </div>
   </div>
 </section>
 <section style="padding:0;overflow:hidden;max-width:100vw;">
@@ -1530,10 +1537,10 @@ footer {
       .sl-kb-rows { width:100%; max-width:100%; display:flex; flex-direction:column; align-items:center; gap:3px; }
       .sl-kb-row { justify-content:center; width:100%; display:flex; gap:5px; }
       .sl-kb-title { text-align:center; color:rgba(255,255,255,0.5); font-size:0.72rem; margin-bottom:6px; letter-spacing:0.1em; }
-      .sl-os-toggle { display:flex; gap:6px; justify-content:center; margin-bottom:6px; }
-      .sl-os-btn { background:#13132a; color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.1); padding:4px 16px; border-radius:14px; font-size:0.72rem; cursor:pointer; font-weight:700; transition:all 0.2s; }
-      .sl-os-btn:hover { background:#1e1e3e; color:rgba(255,255,255,0.9); }
-      .sl-os-btn.active { background:var(--main); color:#fff; border-color:var(--main); }
+      .sl-os-toggle-outer { display:inline-flex; gap:6px; justify-content:center; background:#f0f0e8; padding:4px; border-radius:20px; }
+      .sl-os-btn { background:transparent; color:var(--gray); border:none; padding:6px 18px; border-radius:16px; font-size:0.78rem; cursor:pointer; font-weight:700; transition:all 0.2s; }
+      .sl-os-btn:hover { color:var(--main-dark); }
+      .sl-os-btn.active { background:var(--main); color:#fff; }
       .sl-kb-rows { display:flex; flex-direction:column; align-items:center; gap:4px; }
       .sl-kb-row { display:flex; gap:3px; }
       .sk { flex:1 1 0; min-width:0; max-width:80px; height:clamp(44px, 6vh, 60px); border-radius:6px; display:flex; align-items:center; justify-content:center;
@@ -1572,11 +1579,6 @@ footer {
       </div>
 
       <div class="sl-keyboard" id="slKeyboard">
-        <div class="sl-kb-title">SECOND LIFE KEYBOARD — 光っているキーを押してみてください</div>
-        <div class="sl-os-toggle">
-          <button type="button" class="sl-os-btn" data-os="win">Windows</button>
-          <button type="button" class="sl-os-btn" data-os="mac">Mac</button>
-        </div>
         <div class="sl-kb-rows" id="slKbRows"></div>
       </div>
     </div>
