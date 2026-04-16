@@ -1470,6 +1470,8 @@ footer {
 
       /* 地面：CSS 3D で傾けた大平面 */
       .sl-floor { position:absolute; bottom:0; left:50%; width:800%; height:2000px; transform-style:preserve-3d;
+        -webkit-mask:radial-gradient(ellipse 60% 60% at 50% 100%, #000 40%, transparent 90%);
+        mask:radial-gradient(ellipse 60% 60% at 50% 100%, #000 40%, transparent 90%);
         transform:translateX(-50%) translateZ(0) rotateX(75deg); transform-origin:50% 0%;
         background:linear-gradient(180deg, #7CB342 0%, #558B2F 40%, #33691E 100%); }
       .sl-floor-grid { position:absolute; inset:0; will-change:background-position;
@@ -1719,7 +1721,7 @@ footer {
         });
         if (forward !== 0) {
           // 前進：旋回角度で進行方向ベクトルを回転（180°旋回後も正しく前進）
-          const step = -forward * 0.4;
+          const step = -forward * 0.8;
           const rad = sceneRot * Math.PI / 180;
           const dz = step * Math.cos(rad);
           const dx = step * Math.sin(rad);
@@ -1736,7 +1738,7 @@ footer {
         }
         if (turn !== 0) {
           // 旋回：植生と地面をY軸で回転（視点が回る）
-          sceneRot += turn * 0.3;
+          sceneRot += turn * 0.15;
           const rotY = -sceneRot;
           if (vegEl) vegEl.style.transform = `rotateY(${rotY}deg)`;
           if (floorEl) floorEl.style.transform = `translateX(-50%) rotateY(${rotY}deg) rotateX(75deg)`;
