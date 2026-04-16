@@ -1719,7 +1719,7 @@ footer {
         });
         if (forward !== 0) {
           // 前進：旋回角度で進行方向ベクトルを回転（180°旋回後も正しく前進）
-          const step = -forward * 12;
+          const step = -forward * 2;
           const rad = sceneRot * Math.PI / 180;
           const dz = step * Math.cos(rad);
           const dx = step * Math.sin(rad);
