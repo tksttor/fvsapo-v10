@@ -1530,6 +1530,10 @@ footer {
       .sl-kb-rows { width:100%; max-width:100%; display:flex; flex-direction:column; align-items:center; gap:6px; }
       .sl-kb-row { justify-content:center; width:100%; display:flex; gap:5px; }
       .sl-kb-title { text-align:center; color:rgba(255,255,255,0.5); font-size:0.72rem; margin-bottom:10px; letter-spacing:0.1em; }
+      .sl-os-toggle { display:flex; gap:6px; justify-content:center; margin-bottom:10px; }
+      .sl-os-btn { background:#13132a; color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.1); padding:4px 16px; border-radius:14px; font-size:0.72rem; cursor:pointer; font-weight:700; transition:all 0.2s; }
+      .sl-os-btn:hover { background:#1e1e3e; color:rgba(255,255,255,0.9); }
+      .sl-os-btn.active { background:var(--main); color:#fff; border-color:var(--main); }
       .sl-kb-rows { display:flex; flex-direction:column; align-items:center; gap:4px; }
       .sl-kb-row { display:flex; gap:3px; }
       .sk { flex:1 1 0; min-width:0; max-width:80px; height:clamp(44px, 6vh, 60px); border-radius:6px; display:flex; align-items:center; justify-content:center;
@@ -1569,6 +1573,10 @@ footer {
 
       <div class="sl-keyboard" id="slKeyboard">
         <div class="sl-kb-title">SECOND LIFE KEYBOARD — 光っているキーを押してみてください</div>
+        <div class="sl-os-toggle">
+          <button type="button" class="sl-os-btn" data-os="win">Windows</button>
+          <button type="button" class="sl-os-btn" data-os="mac">Mac</button>
+        </div>
         <div class="sl-kb-rows" id="slKbRows"></div>
       </div>
     </div>
@@ -1634,27 +1642,33 @@ footer {
         });
       }
 
-      // Keyboard layout
+      // Keyboard layout。l は Windows 基準、lm を指定した場合 Mac で差し替え
       const LIT='lit', DIM='dim';
       const slKeys = [
-        { keys:[{l:'Esc',k:'Escape',s:DIM},{l:'1',s:DIM},{l:'2',s:DIM},{l:'3',s:DIM},{l:'4',s:DIM},{l:'5',s:DIM},{l:'6',s:DIM},{l:'7',s:DIM},{l:'8',s:DIM},{l:'9',s:DIM},{l:'0',s:DIM},{l:'-',s:DIM},{l:'=',s:DIM},{l:'⌫',k:'Backspace',s:DIM,w:'w2'}] },
+        { keys:[{l:'Esc',k:'Escape',s:DIM},{l:'1',s:DIM},{l:'2',s:DIM},{l:'3',s:DIM},{l:'4',s:DIM},{l:'5',s:DIM},{l:'6',s:DIM},{l:'7',s:DIM},{l:'8',s:DIM},{l:'9',s:DIM},{l:'0',s:DIM},{l:'-',s:DIM},{l:'=',s:DIM},{l:'⌫',lm:'delete',k:'Backspace',s:DIM,w:'w2'}] },
         { keys:[{l:'Tab',s:DIM,w:'w1-5'},{l:'Q',s:DIM},{l:'W',k:'w',s:LIT},{l:'E',k:'e',s:LIT},{l:'R',s:DIM},{l:'T',k:'t',s:LIT},{l:'Y',s:DIM},{l:'U',s:DIM},{l:'I',s:DIM},{l:'O',s:DIM},{l:'P',s:DIM},{l:'[',s:DIM},{l:']',s:DIM},{l:'\\',s:DIM,w:'w1-5'}] },
-        { keys:[{l:'Caps',s:DIM,w:'w2'},{l:'A',k:'a',s:LIT},{l:'S',k:'s',s:LIT},{l:'D',k:'d',s:LIT},{l:'F',s:DIM},{l:'G',s:DIM},{l:'H',s:DIM},{l:'J',s:DIM},{l:'K',s:DIM},{l:'L',s:DIM},{l:';',s:DIM},{l:"'",s:DIM},{l:'Enter',k:'enter',s:LIT,w:'w2'}] },
+        { keys:[{l:'Caps',s:DIM,w:'w2'},{l:'A',k:'a',s:LIT},{l:'S',k:'s',s:LIT},{l:'D',k:'d',s:LIT},{l:'F',s:DIM},{l:'G',s:DIM},{l:'H',s:DIM},{l:'J',s:DIM},{l:'K',s:DIM},{l:'L',s:DIM},{l:';',s:DIM},{l:"'",s:DIM},{l:'Enter',lm:'return',k:'enter',s:LIT,w:'w2'}] },
         { keys:[{l:'Shift',s:DIM,w:'w2-5'},{l:'Z',s:DIM},{l:'X',s:DIM},{l:'C',k:'c',s:LIT},{l:'V',s:DIM},{l:'B',k:'b',s:LIT},{l:'N',s:DIM},{l:'M',k:'m',s:LIT},{l:',',s:DIM},{l:'.',s:DIM},{l:'/',s:DIM},{l:'Shift',s:DIM,w:'w2-5'}] },
-        { keys:[{l:'Ctrl',s:DIM,w:'w1-5'},{l:'Win',s:DIM},{l:'Alt',k:'alt',s:LIT,w:'w1-25'},{l:'Space',k:'space',s:LIT,w:'w6'},{l:'Alt',s:DIM,w:'w1-25'},{l:'Fn',s:DIM},{l:'Ctrl',s:DIM,w:'w1-5'},{l:'←',k:'left',s:LIT},{l:'↑',k:'up',s:LIT},{l:'↓',k:'down',s:LIT},{l:'→',k:'right',s:LIT}] },
+        { keys:[{l:'Ctrl',lm:'control',s:DIM,w:'w1-5'},{l:'Win',lm:'⌘',s:DIM},{l:'Alt',lm:'option',k:'alt',s:LIT,w:'w1-25'},{l:'Space',k:'space',s:LIT,w:'w6'},{l:'Alt',lm:'option',s:DIM,w:'w1-25'},{l:'Fn',s:DIM},{l:'Ctrl',lm:'control',s:DIM,w:'w1-5'},{l:'←',k:'left',s:LIT},{l:'↑',k:'up',s:LIT},{l:'↓',k:'down',s:LIT},{l:'→',k:'right',s:LIT}] },
       ];
+      // Mac/Windows 判定（初回：自動検出）
+      let currentOS = /mac|darwin/i.test(navigator.platform || navigator.userAgent) ? 'mac' : 'win';
       const rowsEl = document.getElementById('slKbRows');
-      slKeys.forEach(row=>{
-        const r=document.createElement('div');r.className='sl-kb-row';
-        row.keys.forEach(kd=>{
-          const b=document.createElement('div');
-          b.className='sk '+kd.s+(kd.w?' '+kd.w:'');
-          b.textContent=kd.l;
-          if(kd.k) b.dataset.k=kd.k;
-          r.appendChild(b);
+      function renderKeyboard() {
+        rowsEl.innerHTML = '';
+        slKeys.forEach(row=>{
+          const r=document.createElement('div');r.className='sl-kb-row';
+          row.keys.forEach(kd=>{
+            const b=document.createElement('div');
+            b.className='sk '+kd.s+(kd.w?' '+kd.w:'');
+            b.textContent = (currentOS === 'mac' && kd.lm) ? kd.lm : kd.l;
+            if(kd.k) b.dataset.k=kd.k;
+            r.appendChild(b);
+          });
+          rowsEl.appendChild(r);
         });
-        rowsEl.appendChild(r);
-      });
+      }
+      renderKeyboard();
 
       // Actions
       const avatar=document.getElementById('slAvatar'), action=document.getElementById('slAction'), desc=document.getElementById('slDesc');
@@ -1785,14 +1799,36 @@ footer {
         releaseKey(k);
       });
 
-      // 画面上のキー：クリックし続けると動き続ける
-      document.querySelectorAll('.sk[data-k]').forEach(el => {
-        const k = el.dataset.k;
-        el.addEventListener('pointerdown', (e) => { e.preventDefault(); pressKey(k); el.setPointerCapture(e.pointerId); });
-        el.addEventListener('pointerup', () => releaseKey(k));
-        el.addEventListener('pointerleave', () => releaseKey(k));
-        el.addEventListener('pointercancel', () => releaseKey(k));
+      // 画面上のキー：クリックし続けると動き続ける（再レンダリングに追随）
+      function attachKeyHandlers() {
+        document.querySelectorAll('.sk[data-k]').forEach(el => {
+          if (el.dataset.hooked) return;
+          el.dataset.hooked = '1';
+          const k = el.dataset.k;
+          el.addEventListener('pointerdown', (e) => { e.preventDefault(); pressKey(k); try{el.setPointerCapture(e.pointerId);}catch{} });
+          el.addEventListener('pointerup', () => releaseKey(k));
+          el.addEventListener('pointerleave', () => releaseKey(k));
+          el.addEventListener('pointercancel', () => releaseKey(k));
+        });
+      }
+      attachKeyHandlers();
+
+      // OS 切替ボタン
+      document.querySelectorAll('.sl-os-btn').forEach(btn => {
+        if (btn.dataset.os === currentOS) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          currentOS = btn.dataset.os;
+          document.querySelectorAll('.sl-os-btn').forEach(b => b.classList.toggle('active', b.dataset.os === currentOS));
+          acts.e.desc = currentOS === 'mac' ? 'E で飛行。C で下降' : 'E / PgUp で飛行。C で下降';
+          acts.enter.desc = currentOS === 'mac' ? 'return でチャット欄を開きます。話さなくても大丈夫' : 'Enter でチャット欄を開きます。話さなくても大丈夫';
+          renderKeyboard();
+          attachKeyHandlers();
+        });
       });
+      if (currentOS === 'mac') {
+        acts.e.desc = 'E で飛行。C で下降';
+        acts.enter.desc = 'return でチャット欄を開きます。話さなくても大丈夫';
+      }
     })();
     </script>
 
